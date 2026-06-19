@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+dist/
+dist-ssr/
+*.local
+
+# Backend
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Models
+backend/models/
