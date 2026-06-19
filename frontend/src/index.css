@@ -239,3 +239,21 @@ body {
 .status-dot.connected {
   background-color: #10b981; /* green */
 }
+
+/* Quick Replies */
+.quick-reply-btn {
+  background-color: var(--bg-panel);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.quick-reply-btn:hover {
+  background-color: var(--accent-primary);
+  color: white;
+  transform: translateY(-2px);
+}

@@ -1,12 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, History } from 'lucide-react';
+import { Send, History, Map as MapIcon } from 'lucide-react';
 import { useWebSocket } from './hooks/useWebSocket';
 import { useAudioStream } from './hooks/useAudioStream';
+import MapPanel from './components/MapPanel';
 
 const WS_URL = 'ws://localhost:8000/ws/chat';
 
+const HARDCODED_QUESTIONS = [
+  "Xin Bà cho biết tại sao lại chọn Núi Nưa làm căn cứ khởi nghĩa đầu tiên?",
+  "Trong trận chiến ở Bồ Điền, quân Đông Ngô đông gấp bội, Bà đã dùng chiến thuật gì?",
+  "Lục Dận là tên tướng gian xảo, hắn đã dùng thủ đoạn gì để chống lại nghĩa quân?",
+  "Cảm xúc của Bà ra sao khi buộc phải lui quân về Núi Tùng?",
+  "Câu nói 'Tôi chỉ muốn cưỡi cơn gió mạnh...' được Bà thốt lên trong hoàn cảnh nào?"
+];
+
 function App() {
   const [inputText, setInputText] = useState("");
+  const [visitedLocations, setVisitedLocations] = useState([]);
+  const [userMsgCount, setUserMsgCount] = useState(0);
+  const [activeQuestions, setActiveQuestions] = useState([]);
   
   const { playAudioChunk, initAudio, volume } = useAudioStream();
   const { isConnected, messages, sendMessage, isReceiving } = useWebSocket(WS_URL, playAudioChunk);
@@ -20,6 +32,36 @@ function App() {
 
   const BAD_WORDS = ['địt', 'đụ', 'cặc', 'lồn', 'buồi', 'đm', 'vcl', 'vãi lồn', 'chó', 'ngu', 'đéo', 'đĩ', 'phò', 'dcm'];
 
+  const rollRandomQuestions = React.useCallback(() => {
+    const shuffled = [...HARDCODED_QUESTIONS].sort(() => 0.5 - Math.random());
+    setActiveQuestions(shuffled.slice(0, 2));
+  }, []);
+
+  // Initial roll
+  useEffect(() => {
+    rollRandomQuestions();
+  }, [rollRandomQuestions]);
+
+  const handleNewUserMessage = () => {
+    setUserMsgCount(prev => {
+      const newCount = prev + 1;
+      if (newCount % 5 === 0) {
+        rollRandomQuestions();
+      } else {
+        setActiveQuestions([]); // hide questions after user asks something else
+      }
+      return newCount;
+    });
+  };
+
+  const handleQuickReply = (reply) => {
+    if (isReceiving) return;
+    initAudio();
+    sendMessage(reply);
+    setActiveQuestions([]);
+    handleNewUserMessage();
+  };
+
   const handleSendText = () => {
     const text = inputText.trim();
     if (text && !isReceiving) {
@@ -32,7 +74,16 @@ function App() {
       initAudio();
       sendMessage(text);
       setInputText("");
+      handleNewUserMessage();
     }
+  };
+
+  const handleLocationClick = (loc) => {
+    if (isReceiving || visitedLocations.includes(loc.id)) return;
+    initAudio();
+    setVisitedLocations(prev => [...prev, loc.id]);
+    const promptText = `[HỆ THỐNG]: Người chơi vừa đặt chân đến ${loc.name}. Bà hãy kể một kỷ niệm hoặc một sự kiện lịch sử ngắn gọn gắn liền với địa danh này.`;
+    sendMessage(promptText);
   };
 
   return (
@@ -54,9 +105,13 @@ function App() {
             </div>
           )}
           {messages.map((msg, idx) => {
+            if (msg.sender === 'user' && msg.text.startsWith('[HỆ THỐNG]')) {
+              return null;
+            }
+
             const isLatestBotMsg = msg.sender === 'bot' && 
-              (idx === messages.length - 1 || (idx === messages.length - 2 && messages[messages.length-1].sender === 'user'));
-            
+              (idx === messages.length - 1 || (idx === messages.length - 2 && messages[messages.length-1].sender === 'user' && messages[messages.length-1].text.startsWith('[HỆ THỐNG]')));
+
             return (
               <div key={msg.id} className={`message-container ${msg.sender}`}>
                 {msg.sender === 'bot' && (
@@ -71,8 +126,25 @@ function App() {
                     <div className="avatar-inner"></div>
                   </div>
                 )}
-                <div className={`message ${msg.sender}`}>
-                  {msg.text}
+                <div className="message-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '100%' }}>
+                  <div className={`message ${msg.sender}`}>
+                    {msg.text}
+                  </div>
+                  {isLatestBotMsg && activeQuestions.length > 0 && (
+                    <div className="quick-replies" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '4px' }}>
+                      {activeQuestions.map((q, i) => (
+                        <button 
+                          key={i} 
+                          className="quick-reply-btn"
+                          disabled={isReceiving}
+                          style={{ opacity: isReceiving ? 0.5 : 1, cursor: isReceiving ? 'not-allowed' : 'pointer' }}
+                          onClick={() => handleQuickReply(q)}
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -111,21 +183,12 @@ function App() {
       </main>
 
       {/* Objective History Fact Panel */}
-      <aside className="side-panel">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-          <History size={24} color="var(--accent-primary)" />
-          <h2 className="panel-title">Sự kiện lịch sử</h2>
+      <aside className="side-panel" style={{ padding: '20px', width: '400px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+          <MapIcon size={24} color="var(--accent-primary)" />
+          <h2 className="panel-title" style={{ marginBottom: 0 }}>Bản Đồ Cửu Chân</h2>
         </div>
-        
-        <div className="fact-card">
-          <h3>Khởi nghĩa Bà Triệu (248)</h3>
-          <p>Bà Triệu cùng anh trai Triệu Quốc Đạt lãnh đạo nhân dân dấy binh khởi nghĩa chống lại ách đô hộ của nhà Ngô, với căn cứ chính ở vùng Cửu Chân (Thanh Hóa ngày nay).</p>
-        </div>
-
-        <div className="fact-card">
-          <h3>Lời thề bất hủ</h3>
-          <p>"Tôi chỉ muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, lấy lại giang sơn, dựng nền độc lập, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp cho người."</p>
-        </div>
+        <MapPanel onLocationClick={handleLocationClick} isReceiving={isReceiving} visitedLocations={visitedLocations} />
       </aside>
     </div>
   );
