@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-export function useWebSocket(url, onAudioChunk) {
+export function useWebSocket(url) {
   const [isConnected, setIsConnected] = useState(false);
   const [messages, setMessages] = useState([]);
   const [isReceiving, setIsReceiving] = useState(false);
@@ -21,7 +21,6 @@ export function useWebSocket(url, onAudioChunk) {
       console.log('Disconnected from WebSocket');
       setIsConnected(false);
       setIsReceiving(false);
-      // Optional: implement retry logic here
     };
 
     wsRef.current.onmessage = (event) => {
@@ -32,19 +31,13 @@ export function useWebSocket(url, onAudioChunk) {
           currentBotMessageRef.current += payload.data;
           setMessages(prev => {
             const newMessages = [...prev];
-            // If the last message is from the bot, update it
             if (newMessages.length > 0 && newMessages[newMessages.length - 1].sender === 'bot') {
               newMessages[newMessages.length - 1].text = currentBotMessageRef.current;
             } else {
-              // Otherwise add a new bot message
               newMessages.push({ id: Date.now(), sender: 'bot', text: currentBotMessageRef.current });
             }
             return newMessages;
           });
-        } else if (payload.type === 'audio') {
-          if (onAudioChunk) {
-            onAudioChunk(payload.data);
-          }
         } else if (payload.type === 'done') {
           setIsReceiving(false);
         }
@@ -52,7 +45,7 @@ export function useWebSocket(url, onAudioChunk) {
         console.error("Failed to parse websocket message", e);
       }
     };
-  }, [url, onAudioChunk]);
+  }, [url]);
 
   useEffect(() => {
     connect();
@@ -65,13 +58,10 @@ export function useWebSocket(url, onAudioChunk) {
 
   const sendMessage = useCallback((text) => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      // Add user message to UI
       setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text }]);
-      // Clear current bot message builder
       currentBotMessageRef.current = "";
       setIsReceiving(true);
-      // Send to server
-      wsRef.current.send(text);
+      wsRef.current.send(JSON.stringify({ text }));
     } else {
       console.error("WebSocket is not connected");
     }

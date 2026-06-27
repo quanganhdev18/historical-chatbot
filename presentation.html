@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bản Mô Tả Ý Tưởng</title>
+    <style>
+        @page { size: 297mm 210mm; margin: 0; } /* A4 landscape */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            page-break-after: always;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #2c3e50, #bdc3c7);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 80px;
+            position: relative;
+        }
+        .slide:nth-child(even) {
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            color: #2c3e50;
+        }
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 0.5em;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .slide:nth-child(even) h1 {
+            text-shadow: none;
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            font-size: 2em;
+            font-weight: 300;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        ul {
+            font-size: 1.8em;
+            line-height: 1.6;
+            width: 100%;
+        }
+        li {
+            margin-bottom: 20px;
+        }
+        .team-box {
+            background: rgba(255,255,255,0.1);
+            padding: 30px 60px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+            text-align: center;
+            margin-top: 30px;
+        }
+        .team-box p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 1.2em;
+            opacity: 0.7;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title & Team -->
+    <div class="slide">
+        <h1>Historical Chatbot</h1>
+        <h2>Hành trình gặp gỡ Bà Triệu</h2>
+        <div class="team-box">
+            <p><strong>Thành viên đội thi:</strong></p>
+            <p>Đỗ Quang Anh</p>
+            <p>Phạm Văn Quân</p>
+            <p>Phạm Văn Hiệp</p>
+            <p>Nguyễn Đình Tuấn Anh</p>
+        </div>
+        <div class="footer">1 / 5</div>
+    </div>
+
+    <!-- Slide 2: Vấn đề & Đối tượng -->
+    <div class="slide">
+        <h1>Vấn Đề & Đối Tượng</h1>
+        <ul>
+            <li><strong>Vấn đề giải quyết:</strong> Việc học lịch sử hiện nay thường thông qua sách vở khô khan. Học sinh khó hình dung và cảm nhận được khí thế hào hùng của các sự kiện, dẫn đến sự thiếu hứng thú và tương tác thụ động một chiều.</li>
+            <li><strong>Đối tượng sử dụng:</strong> Học sinh, sinh viên, những người đam mê lịch sử Việt Nam, cũng như các bảo tàng, khu di tích muốn số hóa trải nghiệm tham quan công nghệ cao.</li>
+        </ul>
+        <div class="footer">2 / 5</div>
+    </div>
+
+    <!-- Slide 3: Trải nghiệm -->
+    <div class="slide">
+        <h1>Trải Nghiệm Muốn Tạo Ra</h1>
+        <ul>
+            <li><strong>Tương tác nhập vai (Role-play):</strong> Người dùng được trò chuyện trực tiếp với AI đóng vai Bà Triệu, mang đậm tính cách, giọng điệu oai phong, chuẩn lịch sử.</li>
+            <li><strong>Không gian chiến thuật:</strong> Trải nghiệm bản đồ mô phỏng các căn cứ trọng yếu (Ngàn Nưa, Bồ Điền, Núi Tùng).</li>
+            <li><strong>Hội thoại đa tuyến:</strong> Tương tác với hệ thống lựa chọn tình huống tĩnh để người dùng nhập tâm vào hoàn cảnh của người xưa.</li>
+        </ul>
+        <div class="footer">3 / 5</div>
+    </div>
+
+    <!-- Slide 4: Công nghệ -->
+    <div class="slide">
+        <h1>Công Nghệ Dự Kiến Sử Dụng</h1>
+        <ul>
+            <li><strong>Giao diện (Frontend):</strong> ReactJS, thiết kế giao diện Minimalist SVG Vector Map.</li>
+            <li><strong>Máy chủ (Backend):</strong> FastAPI (Python) kết nối luồng WebSocket truyền tải âm thanh thời gian thực.</li>
+            <li><strong>Trí tuệ nhân tạo (LLM):</strong> Nền tảng Ollama chạy mô hình Qwen 2.5 với System Prompt được tinh chỉnh đặc tả nhân vật Bà Triệu.</li>
+            <li><strong>Xử lý giọng nói (TTS):</strong> Piper TTS với mô hình giọng tiếng Việt (Real-time Audio Streaming).</li>
+        </ul>
+        <div class="footer">4 / 5</div>
+    </div>
+
+    <!-- Slide 5: Giá trị nổi bật -->
+    <div class="slide">
+        <h1>Giá Trị Nổi Bật Của Sản Phẩm</h1>
+        <ul>
+            <li><strong>Zero-Budget & Open-Source:</strong> Tận dụng 100% tài nguyên mã nguồn mở, có thể chạy cục bộ trên máy tính không tốn chi phí thuê API.</li>
+            <li><strong>Chân thực & Cảm xúc:</strong> Lịch sử không chỉ là văn bản, mà còn được tái hiện qua giọng nói dõng dạc và hình ảnh trực quan sinh động.</li>
+            <li><strong>Tính mở rộng cực cao:</strong> Kiến trúc hệ thống linh hoạt, dễ dàng tái sử dụng bộ khung để tạo ra các vị anh hùng lịch sử khác (Trần Hưng Đạo, Quang Trung...).</li>
+        </ul>
+        <div class="footer">5 / 5</div>
+    </div>
+
+</body>
+</html>
