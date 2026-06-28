@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&family=Cinzel:wght@400;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&family=Cinzel:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Press+Start+2P&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -57,7 +57,7 @@ body {
 /* ==========================================================================
    MENU & CHARACTER SELECT (Shared)
    ========================================================================== */
-.character-select-container, .menu-container {
+.menu-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,9 +69,165 @@ body {
   animation: fadeIn 1s ease-out;
 }
 
-/* Fallback background for Character Select (before theme is chosen) */
-.character-select-container {
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+/* ==========================================================================
+   SPLIT SCREEN CHARACTER SELECT
+   ========================================================================== */
+.split-screen-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  animation: fadeIn 1s ease-out;
+}
+
+.split-pane {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.split-pane:hover {
+  flex: 1.6;
+}
+
+.split-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  z-index: 1;
+}
+
+.split-batrieu .split-bg { background-image: url('/bg_batrieu.png'); }
+.split-leloi .split-bg { background-image: url('/bg_leloi.png'); }
+
+.split-screen-container:hover .split-pane:not(:hover) .split-bg {
+  filter: grayscale(80%) brightness(0.3);
+}
+
+.split-pane:hover .split-bg {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.split-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+  z-index: 2;
+  transition: opacity 0.6s ease;
+}
+
+.split-pane:hover .split-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
+}
+
+.split-center-title {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+  background: rgba(0,0,0,0.6);
+  padding: 15px 40px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.4s ease;
+}
+
+.split-screen-container:hover .split-center-title {
+  opacity: 0;
+}
+
+.split-center-title h1 {
+  font-family: 'Cinzel', serif;
+  color: white;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  margin: 0;
+}
+
+.split-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px;
+}
+
+.split-title-vertical {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  font-size: 5rem;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  letter-spacing: 15px;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.split-batrieu .split-title-vertical { font-family: 'Playfair Display', serif; }
+.split-leloi .split-title-vertical { font-family: 'Cinzel', serif; }
+
+.split-pane:hover .split-title-vertical { opacity: 0; }
+
+.split-details {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.5s ease;
+  transition-delay: 0.1s;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.split-pane:hover .split-details {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.split-name {
+  font-size: 4rem;
+  margin-bottom: 5px;
+  text-shadow: 0 10px 20px rgba(0,0,0,0.8);
+}
+.split-batrieu .split-name { font-family: 'Playfair Display', serif; color: #fbbf24; }
+.split-leloi .split-name { font-family: 'Cinzel', serif; color: #fef08a; }
+
+.split-title {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.split-batrieu .split-title { font-family: 'Inter', sans-serif; }
+.split-leloi .split-title { font-family: 'Cinzel', serif; }
+
+.split-desc {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.split-btn {
+  font-size: 1.2rem;
+  padding: 15px 40px;
+  border-radius: 50px;
 }
 
 .menu-content {
@@ -107,15 +263,15 @@ body {
 }
 
 /* Cards */
-.character-cards, .menu-cards {
+.menu-cards {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.char-card, .menu-card {
-  width: 320px;
+.menu-card {
+  width: 380px;
   padding: 40px 30px;
   text-align: center;
   cursor: pointer;
@@ -124,31 +280,32 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  background: rgba(30, 41, 59, 0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
   color: white;
 }
-.menu-card { width: 380px; }
 
-.char-card:hover, .menu-card:hover {
-  transform: translateY(-10px);
-  background: rgba(30, 41, 59, 0.8);
-  border-color: #fbbf24;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(251, 191, 36, 0.2);
+.menu-card h2 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  transition: color 0.4s ease;
+  margin: 0;
 }
 
-.char-avatar {
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  border: 4px solid #fbbf24;
-  background-size: cover; background-position: center;
+.menu-card p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
-.char-name { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; margin: 0; }
-.char-desc, .menu-card p { color: #cbd5e1; line-height: 1.6; }
-.card-icon { font-size: 3rem; margin-bottom: 10px; }
+.card-icon {
+  font-size: 3.5rem;
+  margin-bottom: 5px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-card:hover .card-icon {
+  transform: scale(1.1) translateY(-10px);
+}
 
 /* Global Buttons */
 .btn-primary {
@@ -172,6 +329,20 @@ body {
    THEME: BÀ TRIỆU (Jungle, Ancient Bronze, Raw)
    ========================================================================== */
 .theme-batrieu {
+  /* Menu Cards */
+  .menu-card {
+    background: rgba(6, 20, 15, 0.6);
+    border: 1px solid rgba(146, 64, 14, 0.5);
+    border-radius: 4px;
+  }
+  .menu-card:hover {
+    transform: translateY(-10px);
+    background: rgba(6, 20, 15, 0.9);
+    border-color: #fbbf24;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 20px rgba(217, 119, 6, 0.3);
+  }
+  .menu-card h2 { font-family: 'Playfair Display', serif; color: #fbbf24; }
+
   /* Visual Novel Mode */
   .vn-content {
     flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
@@ -263,6 +434,20 @@ body {
    THEME: LÊ LỢI (Imperial, Gold, Crimson, Symmetrical)
    ========================================================================== */
 .theme-leloi {
+  /* Menu Cards */
+  .menu-card {
+    background: linear-gradient(180deg, rgba(69, 10, 10, 0.6) 0%, rgba(30, 0, 0, 0.8) 100%);
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    border-radius: 24px;
+  }
+  .menu-card:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(180deg, rgba(69, 10, 10, 0.8) 0%, rgba(30, 0, 0, 0.9) 100%);
+    border-color: #facc15;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 20px rgba(250, 204, 21, 0.3);
+  }
+  .menu-card h2 { font-family: 'Cinzel', serif; color: #fef08a; }
+
   /* Visual Novel Mode */
   .vn-content {
     flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
@@ -383,3 +568,4 @@ body {
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+

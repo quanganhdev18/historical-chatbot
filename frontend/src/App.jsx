@@ -8,22 +8,44 @@ function App() {
 
   if (!character) {
     return (
-      <div className="character-select-container theme-batrieu">
-        <h1 className="text-gradient" style={{ fontSize: '3rem', textShadow: '0 0 20px rgba(251, 191, 36, 0.5)' }}>
-          CHỌN NHÂN VẬT
-        </h1>
-        <div className="character-cards">
-          <div className="char-card glass-panel" onClick={() => setCharacter('batrieu')}>
-            <div className="char-avatar" style={{ backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Lady_Trieu_Au.jpg/250px-Lady_Trieu_Au.jpg)' }}></div>
-            <h2 className="char-name">BÀ TRIỆU</h2>
-            <p className="char-desc">Nữ anh hùng dân tộc thế kỷ 3. Cưỡi voi trắng dấy binh khởi nghĩa ở núi Nưa chống ách đô hộ Đông Ngô.</p>
+      <div className="split-screen-container">
+        {/* BÀ TRIỆU */}
+        <div className="split-pane split-batrieu" onClick={() => setCharacter('batrieu')}>
+          <div className="split-bg"></div>
+          <div className="split-overlay"></div>
+          <div className="split-content">
+            <h2 className="split-title-vertical">BÀ TRIỆU</h2>
+            <div className="split-details">
+              <h2 className="split-name">BÀ TRIỆU</h2>
+              <h3 className="split-title">Nhuỵ Kiều Tướng Quân</h3>
+              <p className="split-desc">
+                Nữ anh hùng dân tộc thế kỷ 3. Cưỡi voi trắng dấy binh khởi nghĩa ở núi Nưa chống ách đô hộ Đông Ngô.
+                "Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông..."
+              </p>
+              <button className="btn-primary split-btn">Lựa Chọn</button>
+            </div>
           </div>
-          
-          <div className="char-card glass-panel" onClick={() => setCharacter('leloi')} style={{ borderColor: '#eab308' }}>
-            <div className="char-avatar" style={{ backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/T%C6%B0%E1%BB%A3ng_%C4%91%C3%A0i_L%C3%AA_L%E1%BB%A3i.jpg/220px-T%C6%B0%E1%BB%A3ng_%C4%91%C3%A0i_L%C3%AA_L%E1%BB%A3i.jpg)', borderColor: '#eab308', boxShadow: '0 0 20px rgba(234, 179, 8, 0.4)' }}></div>
-            <h2 className="char-name" style={{ color: '#eab308' }}>LÊ LỢI</h2>
-            <p className="char-desc">Bình Định Vương thế kỷ 15. Lãnh đạo Khởi nghĩa Lam Sơn đại phá giặc Minh, lập nên triều Hậu Lê huy hoàng.</p>
+        </div>
+        
+        {/* LÊ LỢI */}
+        <div className="split-pane split-leloi" onClick={() => setCharacter('leloi')}>
+          <div className="split-bg"></div>
+          <div className="split-overlay"></div>
+          <div className="split-content">
+            <h2 className="split-title-vertical">LÊ LỢI</h2>
+            <div className="split-details">
+              <h2 className="split-name">LÊ LỢI</h2>
+              <h3 className="split-title">Bình Định Vương</h3>
+              <p className="split-desc">
+                Anh hùng dân tộc thế kỷ 15. Lãnh đạo Khởi nghĩa Lam Sơn đại phá giặc Minh, lập nên triều Hậu Lê huy hoàng, hoàn gươm thần Thuận Thiên.
+              </p>
+              <button className="btn-primary split-btn">Lựa Chọn</button>
+            </div>
           </div>
+        </div>
+        
+        <div className="split-center-title">
+          <h1>CHỌN NHÂN VẬT</h1>
         </div>
       </div>
     );
