@@ -1,6 +1,6 @@
-# Chatbot Lịch Sử - Bà Triệu
+# Chatbot Lịch Sử - Bà Triệu & Lê Lợi
 
-Dự án này là một Chatbot AI nhập vai nhân vật lịch sử Bà Triệu (Triệu Thị Trinh), được xây dựng bằng **FastAPI** (Backend) và **React/Vite** (Frontend). Chatbot sử dụng **Ollama** (model Qwen 2.5 7B) để xử lý ngôn ngữ và **Piper TTS** để tổng hợp giọng nói tiếng Việt. 
+Dự án này là một Chatbot AI nhập vai nhân vật lịch sử (Bà Triệu, Lê Lợi), được xây dựng bằng **FastAPI** (Backend) và **React/Vite** (Frontend). Chatbot sử dụng **Ollama** (model Qwen 2.5 7B) để xử lý ngôn ngữ.
 
 Hệ thống có 2 chế độ chính:
 - **Đàm Đạo Tự Do**: Trò chuyện tự do với AI.
@@ -42,14 +42,7 @@ cd backend
    pip install -r requirements.txt
    ```
 
-3. **Cài đặt Piper TTS (BẮT BUỘC ĐỂ CÓ GIỌNG NÓI):**
-   - Tải file thực thi `piper-windows-amd64.zip` từ [địa chỉ này](https://github.com/rhasspy/piper/releases/latest).
-   - Giải nén và copy file `piper.exe` vào thư mục `backend\venv\Scripts\`.
-   - Tạo thư mục `models` bên trong `backend` và tải 2 tệp giọng nói Tiếng Việt sau bỏ vào đó:
-     - [vi_VN-vais1000-medium.onnx](https://huggingface.co/rhasspy/piper-voices/resolve/main/vi/vi_VN/vais1000/medium/vi_VN-vais1000-medium.onnx)
-     - [vi_VN-vais1000-medium.onnx.json](https://huggingface.co/rhasspy/piper-voices/resolve/main/vi/vi_VN/vais1000/medium/vi_VN-vais1000-medium.onnx.json)
-
-4. Chạy server Backend:
+3. Chạy server Backend:
    ```bash
    python -m uvicorn main:app --reload --port 8000
    ```
