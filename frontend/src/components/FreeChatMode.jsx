@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useWebSocket } from "../hooks/useWebSocket";
+import ParticleAvatar from "./ParticleAvatar";
 
 export default function FreeChatMode({ character, onBack }) {
   const [inputText, setInputText] = useState("");
@@ -80,12 +81,12 @@ export default function FreeChatMode({ character, onBack }) {
   return (
     <div
       className="vn-container"
-      style={{ display: "flex", flexDirection: "column", position: 'relative' }}
+      style={{ display: "flex", flexDirection: "column", position: 'relative', height: '100vh', overflow: 'hidden' }}
     >
       {/* Toast Notification */}
       {unlockedItem && (
         <div style={{ position: 'absolute', top: 80, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(90deg, #d97706, #92400e)', color: 'white', padding: '15px 30px', borderRadius: '30px', zIndex: 1000, boxShadow: '0 10px 20px rgba(0,0,0,0.5)', animation: 'slideUpFade 0.5s ease', border: '2px solid #fde68a' }}>
-          <h3 style={{ margin: 0, fontFamily: 'Cinzel, serif' }}>✨ Đã thu thập: {unlockedItem.name}</h3>
+          <h3 style={{ margin: 0, fontFamily: "'Playfair Display', serif" }}>✨ Đã thu thập: {unlockedItem.name}</h3>
           <p style={{ margin: 0, fontSize: '0.9rem' }}>{unlockedItem.desc}</p>
         </div>
       )}
@@ -95,14 +96,14 @@ export default function FreeChatMode({ character, onBack }) {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)', zIndex: 2000, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{ background: 'rgba(30,0,0,0.9)', border: '2px solid #facc15', borderRadius: '20px', padding: '40px', width: '80%', maxWidth: '800px', color: 'white', position: 'relative' }}>
             <button onClick={() => setShowInventory(false)} style={{ position: 'absolute', top: 20, right: 20, background: 'transparent', border: 'none', color: 'white', fontSize: '1.5rem', cursor: 'pointer' }}>✕</button>
-            <h2 style={{ fontFamily: 'Cinzel, serif', textAlign: 'center', marginBottom: '30px', color: '#fef08a' }}>Hành Trang Hiện Vật</h2>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", textAlign: 'center', marginBottom: '30px', color: '#fef08a' }}>Hành Trang Hiện Vật</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
               {ITEMS[character].map(item => {
                 const isUnlocked = inventory.includes(item.id);
                 return (
                   <div key={item.id} style={{ background: isUnlocked ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.5)', border: `1px solid ${isUnlocked ? '#facc15' : '#333'}`, padding: '20px', borderRadius: '10px', textAlign: 'center', filter: isUnlocked ? 'none' : 'grayscale(100%)', opacity: isUnlocked ? 1 : 0.5 }}>
                     <div style={{ fontSize: '3rem', marginBottom: '10px' }}>{isUnlocked ? '🏺' : '❓'}</div>
-                    <h3 style={{ margin: 0, fontFamily: 'Cinzel, serif', color: isUnlocked ? '#fef08a' : '#777' }}>{item.name}</h3>
+                    <h3 style={{ margin: 0, fontFamily: "'Playfair Display', serif", color: isUnlocked ? '#fef08a' : '#777' }}>{item.name}</h3>
                     <p style={{ fontSize: '0.85rem', marginTop: '10px' }}>{isUnlocked ? item.desc : 'Chưa thu thập'}</p>
                   </div>
                 )
@@ -116,10 +117,11 @@ export default function FreeChatMode({ character, onBack }) {
       <div className="chat-section">
         <header className="chat-header">
           <div className="chat-title">Đàm Đạo Cùng {name}</div>
-          <div style={{ display: 'flex', gap: '15px' }}>
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
             <button className="btn-primary" onClick={() => setShowInventory(true)}>
               🎒 Hành Trang ({inventory.length}/{ITEMS[character].length})
             </button>
+            <span className="wave-hint" style={{ animation: 'none', opacity: 0.8, color: '#facc15', margin: 0 }}>🤏 Chụm nhả ngón tay</span>
             <button className="btn-primary" onClick={onBack}>
               Trở Về
             </button>
@@ -128,7 +130,7 @@ export default function FreeChatMode({ character, onBack }) {
 
         {/* Mini Timeline */}
         <div style={{ background: 'rgba(0,0,0,0.5)', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '10px 20px', display: 'flex', gap: '15px', overflowX: 'auto', whiteSpace: 'nowrap', alignItems: 'center' }}>
-          <span style={{ color: '#facc15', fontFamily: 'Cinzel, serif', fontWeight: 'bold', fontSize: '0.9rem', marginRight: '10px' }}>Dòng Thời Gian:</span>
+          <span style={{ color: '#facc15', fontFamily: "'Playfair Display', serif", fontWeight: 'bold', fontSize: '0.9rem', marginRight: '10px' }}>Dòng Thời Gian:</span>
           {(character === 'batrieu' 
             ? [ { year: '226', event: 'Sinh ra tại Quan Yên' }, { year: '248', event: 'Khởi nghĩa ngàn Nưa' }, { year: '248', event: 'Trận chiến Bồ Điền' }, { year: 'Cuối 248', event: 'Tuẫn tiết tại núi Tùng' } ]
             : [ { year: '1416', event: 'Hội thề Lũng Nhai' }, { year: '1418', event: 'Khởi nghĩa Lam Sơn' }, { year: '1427', event: 'Hội thề Đông Quan' }, { year: '1428', event: 'Lên ngôi Hoàng Đế' } ]
@@ -173,9 +175,7 @@ export default function FreeChatMode({ character, onBack }) {
               className={`message-container ${msg.sender} slide-up`}
             >
               {msg.sender === "bot" && (
-                <div className="bot-avatar">
-                  {character === "batrieu" ? "B" : "L"}
-                </div>
+                <ParticleAvatar character={character} />
               )}
               <div
                 className={`message-bubble ${msg.sender === "user" ? "user-bubble" : ""}`}
@@ -186,9 +186,7 @@ export default function FreeChatMode({ character, onBack }) {
           ))}
           {isReceiving && (
             <div className="message-container bot slide-up">
-              <div className="bot-avatar">
-                {character === "batrieu" ? "B" : "L"}
-              </div>
+              <ParticleAvatar character={character} />
               <div className="message-bubble">
                 <span className="typing-dot">.</span>
                 <span className="typing-dot">.</span>

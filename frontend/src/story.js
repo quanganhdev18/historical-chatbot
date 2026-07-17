@@ -12,21 +12,24 @@ export const STORY_BATRIEU = {
     speaker: "Trưởng Lão Triệu Gia",
     text: "(Đập bàn giận dữ) Kẻ bề dưới câm miệng! Phận nữ nhi nương nhờ cửa họ, đến tuổi cập kê không gả chồng sinh con, lại ngày ngày vác gươm múa giáo xúi giục phản loạn. Mày định kéo cả họ Triệu này tru di cửu tộc hay sao?",
     choices: [
-      { label: "Quay sang chờ xem Bà Triệu phản ứng", nextId: "act1_batrieu_oath" }
+      { label: "Tranh cãi lại: 'Nước mất nhà tan, sao cam chịu làm nô lệ!'", nextId: "act1_batrieu_oath" },
+      { label: "Lùi lại một bước, quay sang chờ xem Bà Triệu phản ứng", nextId: "act1_batrieu_oath" }
     ]
   },
   act1_advise: {
     speaker: "Trưởng Lão Triệu Gia",
     text: "(Vuốt râu) Phó tướng nói phải. Thị Trinh, con nên biết nhẫn nhịn. Sức đàn bà con gái sao chống lại được quan binh Đông Ngô? Chi bằng ta gả con cho tên quan thú họ Tôn, vừa êm chuyện lại có chỗ dựa quyền thế.",
     choices: [
-      { label: "Sắc mặt Bà Triệu lập tức biến đổi...", nextId: "act1_batrieu_oath" }
+      { label: "Gật gù hùa theo trưởng lão để xoa dịu tình hình", nextId: "act1_batrieu_oath" },
+      { label: "Liếc nhìn sắc mặt Bà Triệu đang lập tức biến đổi...", nextId: "act1_batrieu_oath" }
     ]
   },
   act1_batrieu_oath: {
     speaker: "Bà Triệu",
     text: "(Rút phăng thanh gươm chém đứt góc bàn, ánh mắt rực lửa) Các người nghe cho rõ đây! Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, đánh đuổi quân Ngô, giành lại giang sơn, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp cho người!",
     choices: [
-      { label: "Quỳ xuống thề nguyện: 'Xin nguyện theo chủ tướng đến cùng!'", nextId: "act2_start" }
+      { label: "Quỳ xuống thề nguyện: 'Xin nguyện theo chủ tướng đến cùng!'", nextId: "act2_start" },
+      { label: "Nhiệt huyết sôi trào: 'Tôi sẽ làm tiên phong phá giặc!'", nextId: "act2_start" }
     ]
   },
 
@@ -43,28 +46,32 @@ export const STORY_BATRIEU = {
     speaker: "Bà Triệu",
     text: "Thú dữ phải trị bằng đao kiếm! Phó tướng, hạ lệnh bắn tên xước da nó, buộc nó lùi vào vách đá cạn kiệt thể lực cho Ta!",
     choices: [
-      { label: "Tiến hành tấn công voi trắng", nextId: "act2_force_result" }
+      { label: "Tiến hành tấn công voi trắng không thương tiếc", nextId: "act2_force_result" },
+      { label: "Bắn cảnh cáo để đe doạ thay vì lấy mạng", nextId: "act2_force_result" }
     ]
   },
   act2_force_result: {
     speaker: "Dòng Lịch Sử",
     text: "Con voi trắng điên cuồng chống trả, giẫm chết hàng chục nghĩa quân. Cuối cùng, vì kiệt sức và mất máu, nó gục xuống và chịu khuất phục. Bà Triệu có được voi thần nhưng lòng quân ít nhiều hoang mang vì sự tàn nhẫn và tổn thất quá lớn.",
     choices: [
-      { label: "Chấp nhận tổn thất để đạt mục đích", nextId: "act3_start_ruthless" }
+      { label: "Trấn an quân lính: 'Sự hi sinh là cần thiết'", nextId: "act3_start_ruthless" },
+      { label: "Chấp nhận tổn thất để đạt mục đích lớn hơn", nextId: "act3_start_ruthless" }
     ]
   },
   act2_tame: {
     speaker: "Bà Triệu",
     text: "Con voi này có linh tính, đánh nó bằng vũ lực chỉ thu được cái xác không hồn. Ta sẽ nghe ngươi. Giăng bẫy nhưng tuyệt đối không làm nó xước một giọt máu. Ta sẽ tự mình xuống hầm dụ nó.",
     choices: [
-      { label: "Hỗ trợ Bà Triệu thu phục voi", nextId: "act2_tame_result" }
+      { label: "Chuẩn bị hoa quả và thức ăn thả xuống hầm", nextId: "act2_tame_result" },
+      { label: "Trực tiếp hỗ trợ Bà Triệu vỗ về voi trắng", nextId: "act2_tame_result" }
     ]
   },
   act2_tame_result: {
     speaker: "Dòng Lịch Sử",
     text: "Dưới hầm bẫy, Bà Triệu kiên nhẫn nhiều ngày ròng rã trò chuyện, vuốt ve và cho voi ăn. Cảm mến sự chân thành và oai phong của Nữ tướng, voi trắng ngoan ngoãn cúi đầu cho Bà cưỡi. Tiếng tăm Bà Triệu như một nữ thần vang dội khắp Giao Châu.",
     choices: [
-      { label: "Sĩ khí quân đội dâng cao vút", nextId: "act3_start_compassion" }
+      { label: "Sĩ khí quân đội dâng cao vút đến tận mây xanh", nextId: "act3_start_compassion" },
+      { label: "Tự hào đứng chung hàng ngũ dưới bóng voi thần", nextId: "act3_start_compassion" }
     ]
   },
 
@@ -73,14 +80,15 @@ export const STORY_BATRIEU = {
     speaker: "Dòng Lịch Sử",
     text: "Năm 248, Thứ sử Giao Châu là Lục Dận đem 8000 quân tinh nhuệ sang đàn áp. Trong lúc dầu sôi lửa bỏng, một toán lính bị phát hiện lén mang mật thư dâng nộp phòng tuyến cho Lục Dận.",
     choices: [
-      { label: "Bắt giải lên cho Bà Triệu xử lý", nextId: "act3_traitor_ruthless" }
+      { label: "Lập tức trói chặt chúng giải lên trướng", nextId: "act3_traitor_ruthless" },
+      { label: "Khám xét thu giữ toàn bộ mật thư làm bằng chứng", nextId: "act3_traitor_ruthless" }
     ]
   },
   act3_traitor_ruthless: {
     speaker: "Bà Triệu",
     text: "(Nhìn xuống những kẻ phản bội đang run rẩy) Bọn cặn bã! Ta đã ban cho các ngươi cơ hội thoát kiếp nô lệ, vậy mà các ngươi lại cắn ngược lại ta. Phó tướng, hãy lôi bọn chúng ra pháp trường chém đầu bêu cọc, tru di cửu tộc cho Ta!",
     choices: [
-      { label: "Vâng lệnh! Xử quyết không tha!", nextId: "act4_start_dark" },
+      { label: "Vâng lệnh! Xử quyết không tha để lập uy!", nextId: "act4_start_dark" },
       { label: "Chỉ chém kẻ cầm đầu, tha cho gia đình chúng để lấy lòng nhân tâm", nextId: "act4_start_normal" }
     ]
   },
@@ -88,7 +96,8 @@ export const STORY_BATRIEU = {
     speaker: "Dòng Lịch Sử",
     text: "Nhờ uy danh voi thần, quân khởi nghĩa chiến đấu vô cùng anh dũng cản bước Lục Dận. Tuy nhiên, nội bộ binh lính bắt đầu lung lay do Lục Dận tung tin đồn và mua chuộc. Đội canh gác vừa bắt được một lính tráng định đào ngũ trong đêm.",
     choices: [
-      { label: "Áp giải hắn lên trướng", nextId: "act3_traitor_compassion" }
+      { label: "Rút gươm áp giải hắn lên gặp Nữ tướng", nextId: "act3_traitor_compassion" },
+      { label: "Khuyên hắn nên thành thật khai báo để được khoan hồng", nextId: "act3_traitor_compassion" }
     ]
   },
   act3_traitor_compassion: {
@@ -105,7 +114,8 @@ export const STORY_BATRIEU = {
     speaker: "Dòng Lịch Sử",
     text: "Trận Bồ Điền nổ ra ác liệt. Đội quân của Bà Triệu chiến đấu với sự điên cuồng và khát máu. Bọn tay chân của Lục Dận bị nghiền nát dưới chân voi. Tuy nhiên, Lục Dận vô cùng nham hiểm, hắn lùa hàng ngàn bá tánh tay không tấc sắt đi đầu làm bia đỡ đạn.",
     choices: [
-      { label: "Chờ lệnh chủ tướng", nextId: "act4_dark_decision" }
+      { label: "Nín thở chờ lệnh chủ tướng", nextId: "act4_dark_decision" },
+      { label: "Nhìn hàng ngàn bá tánh mà lòng dạ đau xót", nextId: "act4_dark_decision" }
     ]
   },
   act4_dark_decision: {
@@ -120,7 +130,8 @@ export const STORY_BATRIEU = {
     speaker: "Dòng Lịch Sử",
     text: "Sự phân vân giữa kỉ luật và nhân nhượng khiến nhuệ khí nghĩa quân không thực sự kiên định. Tại trận Bồ Điền, 8000 quân Ngô bất ngờ đột kích trong đêm, phá vỡ tuyến phòng thủ.",
     choices: [
-      { label: "Báo động toàn quân", nextId: "act4_normal_decision" }
+      { label: "Thổi tù và báo động toàn quân", nextId: "act4_normal_decision" },
+      { label: "Mặc giáp xông thẳng ra tiền tuyến đỡ đòn", nextId: "act4_normal_decision" }
     ]
   },
   act4_normal_decision: {
@@ -135,14 +146,16 @@ export const STORY_BATRIEU = {
     speaker: "Dòng Lịch Sử",
     text: "Nhờ ân đức của Bà Triệu, quân sĩ thề tử chiến không lùi. Tại trận quyết chiến Bồ Điền, đối diện với đạo quân giáp sắt khổng lồ của Lục Dận, người dân các làng bản lân cận tự nguyện vác gậy gộc, cuốc xẻng lao ra chiến trường hỗ trợ nghĩa quân.",
     choices: [
-      { label: "Đây là trận chiến cuối cùng!", nextId: "act4_true_decision" }
+      { label: "Đây là trận chiến cuối cùng! Giương cao ngọn cờ!", nextId: "act4_true_decision" },
+      { label: "Siết chặt tay gươm, thề cùng sống chết với chủ tướng", nextId: "act4_true_decision" }
     ]
   },
   act4_true_decision: {
     speaker: "Bà Triệu",
     text: "(Mặc áo giáp vàng, rút gươm chỉ thẳng về phía quân Ngô) Hỡi bá tánh Giao Châu! Hôm nay, dẫu máu chảy thành sông, xương chất thành núi, chúng ta cũng quyết không cúi đầu làm nô lệ! Phó tướng, theo Ta xông trận!",
     choices: [
-      { label: "Vung giáo xông thẳng vào trung quân địch!", nextId: "ending_true" }
+      { label: "Vung giáo xông thẳng vào trung quân địch!", nextId: "ending_true" },
+      { label: "Rút gươm thét vang bảo vệ sườn phải cho voi thần!", nextId: "ending_true" }
     ]
   },
 
@@ -195,7 +208,8 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Năm 1416. Rừng núi Lam Sơn âm u. Dưới ánh trăng, Lê Lợi cùng 18 chiến hữu cắt máu ăn thề tại Lũng Nhai, thề sống chết đánh đuổi giặc Minh xâm lược. Bạn là một trong 18 vị công thần đó. Sau buổi thề, Lê Lợi gọi bạn ở lại để bàn việc chiêu mộ nhân tài.",
     choices: [
-      { label: "Lắng nghe chủ định của Lê Lợi", nextId: "act1_advise" }
+      { label: "Lắng nghe chủ định của Lê Lợi", nextId: "act1_advise" },
+      { label: "Tiến lên hiến kế tuyển mộ quân sư", nextId: "act1_advise" }
     ]
   },
   act1_advise: {
@@ -212,7 +226,8 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Năm 1418. Nghĩa quân Lam Sơn liên tục bị quân Minh đàn áp, buộc phải rút lên núi Chí Linh. Nhờ mưu kế của Nguyễn Trãi, quân ta tránh được nhiều tổn thất nhưng tình cảnh vẫn vô cùng bi đát. Đã mấy ngày qua, tướng sĩ chỉ ăn cỏ rễ để cầm hơi.",
     choices: [
-      { label: "Vào trướng gặp Lê Lợi", nextId: "act2_chilinh_wisdom" }
+      { label: "Vào trướng gặp Lê Lợi tìm cách giải vây", nextId: "act2_chilinh_wisdom" },
+      { label: "Chấn chỉnh hàng ngũ binh sĩ đang suy sụp", nextId: "act2_chilinh_wisdom" }
     ]
   },
   act2_chilinh_wisdom: {
@@ -227,7 +242,8 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Năm 1418. Đinh Lễ quả là mãnh tướng, liên tục chém tướng đoạt cờ quân Minh. Tuy nhiên, vì thiếu chiến lược, nghĩa quân lọt vào vòng vây khổng lồ tại núi Chí Linh. Tình hình tuyệt vọng đến mức Lê Lợi định tự vẫn để không rơi vào tay giặc.",
     choices: [
-      { label: "Vào trướng gặp Lê Lợi", nextId: "act2_chilinh_force" }
+      { label: "Lập tức xông vào trướng can ngăn Lê Lợi", nextId: "act2_chilinh_force" },
+      { label: "Triệu tập các tướng lĩnh tìm cách phá vây", nextId: "act2_chilinh_force" }
     ]
   },
   act2_chilinh_force: {
@@ -244,7 +260,8 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Lê Lai hi sinh, Lê Lợi thoát hiểm. Mười năm nếm mật nằm gai trôi qua, đạo quân Lam Sơn với mưu lược xuất quỷ nhập thần của Nguyễn Trãi đã ép Vương Thông nhà Minh phải cố thủ tại Đông Quan và xin đầu hàng.",
     choices: [
-      { label: "Bước vào đại doanh dự nghị sự", nextId: "act3_righteous_decision" }
+      { label: "Sửa soạn chiến bào, theo vua tiến vào đại doanh", nextId: "act3_righteous_decision" },
+      { label: "Vinh quang ngẩng cao đầu đi gặp mặt kẻ thù bại trận", nextId: "act3_righteous_decision" }
     ]
   },
   act3_righteous_decision: {
@@ -259,14 +276,16 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Nhờ mưu kế nghi binh, cả Lê Lợi và Lê Lai đều sống sót chạy thoát khỏi Chí Linh. Tuy nhiên, cái giá phải trả là phần lớn lực lượng bị tiêu diệt. Cuộc khởi nghĩa kéo dài dằng dặc suốt 20 năm mới đánh đuổi được quân Minh.",
     choices: [
-      { label: "Tham gia lễ khao quân", nextId: "ending_normal" }
+      { label: "Tham dự đại tiệc khao quân ăn mừng chiến thắng", nextId: "ending_normal" },
+      { label: "Lặng lẽ ngồi nhớ về những người đã ngã xuống", nextId: "ending_normal" }
     ]
   },
   act3_start_dark: {
     speaker: "Dòng Lịch Sử",
     text: "Máu của Lê Lai đã nhen nhóm ngọn lửa thù hận tột cùng. Đạo quân Lam Sơn thiện chiến và tàn nhẫn càn quét giặc Minh từ Nam chí Bắc. Tại Đông Quan, khi quân Minh xin hàng, binh sĩ của bạn khao khát được tàn sát.",
     choices: [
-      { label: "Gặp Lê Lợi xin chỉ thị", nextId: "act3_dark_decision" }
+      { label: "Gặp Lê Lợi xin chỉ thị xử lý tù binh", nextId: "act3_dark_decision" },
+      { label: "Trực tiếp đề xuất phương án đồ sát", nextId: "act3_dark_decision" }
     ]
   },
   act3_dark_decision: {
@@ -283,7 +302,8 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Hành động nhân nghĩa của Lê Lợi vang danh thiên hạ. Đại Cáo Bình Ngô được ban bố, đất nước đón nền thái bình. Một ngày nọ, bạn tháp tùng vua dạo thuyền trên hồ Tả Vọng. Mặt nước bỗng sủi bọt, một con rùa vàng khổng lồ ngoi lên.",
     choices: [
-      { label: "Kinh ngạc nhìn về phía Kim Quy", nextId: "act4_true_decision" }
+      { label: "Kinh ngạc nhìn về phía Thần Quy", nextId: "act4_true_decision" },
+      { label: "Rút gươm chắn phía trước bảo vệ nhà vua", nextId: "act4_true_decision" }
     ]
   },
   act4_true_decision: {
@@ -298,14 +318,16 @@ export const STORY_LELOI = {
     speaker: "Dòng Lịch Sử",
     text: "Việc tàn sát tù binh khiến triều đình nhà Minh thịnh nộ, nhưng vì binh lực kiệt quệ nên đành cắn răng hòa hoãn. Vương triều Hậu Lê được lập nên nhưng phủ bóng đen của bạo lực và nghi kỵ. Tại hồ Tả Vọng, Kim Quy ngoi lên đòi lại gươm thần.",
     choices: [
-      { label: "Chờ xem Lê Lợi quyết định", nextId: "act4_dark_decision" }
+      { label: "Im lặng chờ xem Lê Lợi quyết định thế nào", nextId: "act4_dark_decision" },
+      { label: "Bàng hoàng nhìn con rùa khổng lồ ngóc đầu lên mặt nước", nextId: "act4_dark_decision" }
     ]
   },
   act4_dark_decision: {
     speaker: "Lê Lợi",
     text: "(Nắm chặt chuôi gươm Thuận Thiên) Gươm này do trẫm vào sinh ra tử mới có được. Non sông này là do máu thịt quân ta xây nên. Nay trả gươm, nhỡ ngày mai giặc phương Bắc lại tràn sang thì sao? Rùa vàng, trẫm tuyệt đối không trả!",
     choices: [
-      { label: "Hoan hô quyết định của nhà vua", nextId: "ending_dark" }
+      { label: "Hoan hô quyết định sáng suốt của nhà vua", nextId: "ending_dark" },
+      { label: "Cúi đầu lo sợ điềm gở giáng xuống vương triều", nextId: "ending_dark" }
     ]
   },
 

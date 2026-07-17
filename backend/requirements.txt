@@ -6,3 +6,5 @@ piper-tts
 reportlab
 pillow
 moviepy==1.0.3
+google-generativeai
+python-dotenv
