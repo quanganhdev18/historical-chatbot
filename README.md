@@ -1,62 +1,62 @@
-# Chatbot Lịch Sử - Bà Triệu & Lê Lợi
+# Chatbot Lịch Sử - Bà Triệu & Lê Lợi (AI Gesture Control)
 
-Dự án này là một Chatbot AI nhập vai nhân vật lịch sử (Bà Triệu, Lê Lợi), được xây dựng bằng **FastAPI** (Backend) và **React/Vite** (Frontend). Chatbot sử dụng **Ollama** (model Qwen 2.5 7B) để xử lý ngôn ngữ.
+Dự án này là một nền tảng trải nghiệm lịch sử tương tác nhập vai (Bà Triệu, Lê Lợi), được xây dựng bằng **FastAPI** (Backend) và **React/Vite** (Frontend).
+Đặc biệt, hệ thống sử dụng **Google Gemini API** (`gemini-3.1-flash-lite`) để xử lý ngôn ngữ tự nhiên và **Google MediaPipe** để điều khiển hoàn toàn bằng cử chỉ tay (Hand Tracking) qua Camera.
 
 Hệ thống có 2 chế độ chính:
-- **Đàm Đạo Tự Do**: Trò chuyện tự do với AI.
-- **Visual Novel (Dấu Ấn Cửu Chân)**: Game nhập vai cốt truyện rẽ nhánh đa kết thúc.
+- **Đàm Đạo Tự Do**: Trò chuyện tự do với AI trong vai các nhân vật lịch sử (nhập vai nghiêm ngặt, không phá vỡ hình tượng).
+- **Cốt Truyện (Visual Novel)**: Game nhập vai cốt truyện rẽ nhánh đa kết thúc có đếm ngược thời gian, âm thanh nền sống động và hiệu ứng gõ chữ (Typewriter effect).
 
-## Các Tính Năng Mới (Đã Cập Nhật)
-- **Tối Ưu Giao Diện (Aesthetics)**: Hiệu ứng Micro-animations, Typography với Google Fonts (Cinzel, Playfair Display), và thiết kế bóng đổ "Premium".
-- **Hệ Thống Thu Thập Hiện Vật (Collectibles)**: Tương tác với AI qua các từ khóa ẩn để mở khóa "Bạch Tượng", "Gươm Thuận Thiên"... và lưu trữ trong Hành Trang.
-- **Dòng Thời Gian Tương Tác (Mini Timeline)**: Dễ dàng xem các mốc sự kiện quan trọng và nhấn vào để tự động hỏi AI.
-- **Bộ Nhớ Ngữ Cảnh Nâng Cao**: Sử dụng `/api/chat` giúp Ollama ghi nhớ mượt mà ngữ cảnh lịch sử.
+## 🌟 Các Tính Năng Nổi Bật Mới Nhất
+- **Điều Khiển Bằng Cử Chỉ Tay (AI Hand Tracking)**: 
+  - Không cần chạm chuột! Sử dụng camera để nhận diện tay.
+  - **Đưa tay trái / Đưa tay phải**: Dùng để chọn nhân vật hoặc đưa ra các quyết định trong chế độ Cốt Truyện.
+  - **Chụm nhả ngón tay (Pinch & Release)**: Dùng để quay lại hoặc bỏ qua hiệu ứng chữ. Nhận diện cực nhạy nhờ thuật toán chống nhiễu (Hysteresis) và căn chỉnh theo tỷ lệ bàn tay (Scale-independent).
+- **Thiết Kế Đậm Chất Điện Ảnh (Cinematic UI)**: 
+  - Giao diện Premium với hiệu ứng chuyển cảnh hố đen thời gian (Time Vortex).
+  - Phân chia màn hình (Split Screen) độc đáo khi chọn nhân vật.
+  - Bộ thẻ Typography Google Fonts cao cấp (Cinzel, Playfair Display) theo từng chủ đề nhân vật (Jungle Bronze cho Bà Triệu, Imperial Gold cho Lê Lợi).
+- **Backend Gemini Siêu Tốc**: Thay thế Ollama nội bộ bằng Gemini API qua WebSocket, stream chữ theo thời gian thực với độ trễ cực thấp.
 
 ## Yêu cầu hệ thống
 1. [Node.js](https://nodejs.org/) (để chạy Frontend)
 2. [Python 3.10+](https://www.python.org/) (để chạy Backend)
-3. [Ollama](https://ollama.com/) (để chạy AI Model)
+3. Webcam/Camera (để sử dụng tính năng Hand Tracking)
 
 ---
 
-## Bước 1: Cài đặt và thiết lập AI (Ollama)
-1. Tải và cài đặt Ollama từ trang chủ: https://ollama.com/
-2. Mở Terminal / Command Prompt và tải model Qwen:
-   ```bash
-   ollama run qwen2.5:7b
-   ```
-   *(Hãy đảm bảo Ollama luôn chạy ngầm ở cổng mặc định 11434 khi sử dụng dự án này)*
-
-## Bước 2: Cài đặt Backend
-Mở một Terminal mới và trỏ vào thư mục `backend`:
+## Bước 1: Cài đặt Backend (FastAPI + Gemini)
+Mở một Terminal và trỏ vào thư mục `backend`:
 ```bash
 cd backend
 ```
 
-1. Tạo và kích hoạt môi trường ảo (Virtual Environment):
+1. Tạo file `.env` trong thư mục `backend` và điền API Key của Google Gemini:
+   ```env
+   GEMINI_API_KEY=your_google_gemini_api_key_here
+   ```
+
+2. Tạo và kích hoạt môi trường ảo (Virtual Environment):
    ```bash
    python -m venv venv
    ```
    - **Trên Windows (Command Prompt):** `venv\Scripts\activate`
    - **Trên Windows (PowerShell):** `.\venv\Scripts\Activate.ps1`
-     > **LỖI THƯỜNG GẶP:** Nếu PowerShell báo lỗi chữ đỏ "running scripts is disabled on this system", hãy chạy lệnh này trước để cấp quyền: 
-     > `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`
    - **Trên Mac/Linux:** `source venv/bin/activate`
 
-2. Cài đặt các thư viện cần thiết:
+3. Cài đặt các thư viện cần thiết:
    ```bash
    pip install -r requirements.txt
    ```
+   *(Đảm bảo đã có `google-generativeai`, `fastapi`, `uvicorn`, `python-dotenv`)*
 
-3. Chạy server Backend:
+4. Chạy server Backend:
    ```bash
    python -m uvicorn main:app --reload --port 8000
    ```
 
-## Bước 3: Cài đặt Frontend
-Mở một Terminal khác và trỏ vào thư mục `frontend`. 
-> **LỖI THƯỜNG GẶP:** Nếu bạn dùng PowerShell mà gõ lệnh `npm` bị báo lỗi đỏ (Script Execution Policy), hãy tắt PowerShell và dùng **Command Prompt (cmd.exe)** thay thế!
-
+## Bước 2: Cài đặt Frontend (React + Vite + MediaPipe)
+Mở một Terminal khác và trỏ vào thư mục `frontend`:
 ```bash
 cd frontend
 ```
@@ -65,10 +65,12 @@ cd frontend
    ```bash
    npm install
    ```
+   *(Sẽ cài đặt react, vite, và bộ thư viện @mediapipe/tasks-vision)*
 
 2. Chạy server Frontend:
    ```bash
    npm run dev
    ```
 
-3. Mở trình duyệt theo đường dẫn hiển thị trên terminal (thường là `http://localhost:5173`) và bắt đầu trải nghiệm!
+3. Mở trình duyệt theo đường dẫn hiển thị trên terminal (thường là `http://localhost:5173`).
+4. **Cấp quyền Camera** cho trình duyệt khi được hỏi để AI có thể nhận diện cử chỉ tay của bạn!
