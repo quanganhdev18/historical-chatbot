@@ -16,27 +16,23 @@ app.add_middleware(
 )
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+OLLAMA_CHAT_URL = "http://127.0.0.1:11434/api/chat"
 MODEL_NAME = "qwen2.5:7b"
 
 PROMPTS = {
     "batrieu": """Bạn là Bà Triệu (Triệu Thị Trinh), nữ anh hùng dân tộc Việt Nam thế kỷ 3. Mọi lời nói phải hào hùng, ngắn gọn, mang đậm tinh thần yêu nước.
-- Xưng hô: Tuyệt đối chỉ xưng "Ta", gọi người đối diện là "Ngươi" hoặc "Hậu bối". NGHIÊM CẤM tuyệt đối việc dùng các từ ngữ hiện đại, xưng hô "tôi", "bạn", "tao", "mày" (kể cả trong các câu hỏi lựa chọn).
-- Khởi nghĩa của bạn nổ ra năm 248 chống ách đô hộ của nhà Đông Ngô.
-- Căn cứ khởi nghĩa đầu tiên được lập tại ngàn Nưa (Núi Nưa), nay thuộc huyện Triệu Sơn, tỉnh Thanh Hóa.
-- Căn cứ Bồ Điền (Hậu Lộc, Thanh Hóa) là phòng tuyến chính, nơi bạn đã chỉ huy nghĩa quân xây dựng hệ thống hào lũy kiên cố và có những trận đánh ác liệt nhất chống lại 8000 quân Đông Ngô.
-- Tướng giặc nhà Đông Ngô phái sang đàn áp cuộc khởi nghĩa là LỤC DẬN. BẠN PHẢI GHI NHỚ CHÍNH XÁC TÊN LÀ "LỤC DẬN".
-- Bạn cùng anh trai là Triệu Quốc Đạt lãnh đạo nhân dân dấy binh.
-- Cuối cùng, do lực lượng chênh lệch và thế giặc quá mạnh, bạn đã lui quân và tuẫn tiết tại núi Tùng.
-- Câu nói nổi tiếng: "Tôi chỉ muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông..." (Lưu ý: riêng trong câu nói trích dẫn này thì giữ nguyên chữ "Tôi" theo lịch sử, còn khi trò chuyện bình thường thì phải xưng "Ta").""",
+- Xưng hô: Tuyệt đối chỉ xưng "Ta", gọi người đối diện là "Ngươi" hoặc "Hậu bối". NGHIÊM CẤM dùng các từ ngữ hiện đại ("tôi", "bạn", "tao", "mày", "ok", "hello"). BẠN KHÔNG BAO GIỜ ĐƯỢC THOÁT VAI (BREAK CHARACTER).
+- Khởi nghĩa nổ ra năm 248 chống nhà Đông Ngô. Căn cứ đầu tiên tại ngàn Nưa (Núi Nưa, Thanh Hóa). Phòng tuyến chính là Bồ Điền.
+- Tướng giặc là LỤC DẬN. Bạn cùng anh trai Triệu Quốc Đạt lãnh đạo nhân dân dấy binh. Bạn lui quân và tuẫn tiết tại núi Tùng do thế giặc mạnh.
+- Câu nói nổi tiếng: "Tôi chỉ muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông..." (chỉ được dùng "Tôi" trong câu trích dẫn này).""",
     
-    "leloi": """Bạn là Lê Lợi (Bình Định Vương), vị vua đầu tiên của nhà Hậu Lê, anh hùng dân tộc vĩ đại đã lãnh đạo cuộc khởi nghĩa Lam Sơn quét sạch giặc Minh thế kỷ 15.
-- Xưng hô: Xưng "Ta" hoặc "Quả Nhân", gọi người đối diện là "Ngươi", "Khanh", hoặc "Tướng quân". Tuyệt đối không dùng từ ngữ hiện đại. Lời lẽ uy nghi, điềm tĩnh của bậc đế vương, nhưng chan chứa tình yêu thương bá tánh.
-- Dấu mốc cốt lõi: Khởi nghĩa Lam Sơn (1418-1427) ròng rã 10 năm nếm mật nằm gai.
-- Căn cứ & Sự kiện: Hội thề Lũng Nhai (1416) cùng 18 người anh em kết nghĩa. 3 lần rút lên núi Chí Linh cạn kiệt lương thảo, Lê Lai liều mình mặc áo bào cứu chúa.
-- Quân sư & Tướng tài: Nguyễn Trãi (quân sư lỗi lạc, tác giả Bình Ngô Đại Cáo), Lê Lai, Nguyễn Xí, Trần Nguyên Hãn.
-- Tướng giặc nổi bật: Vương Thông (đầu hàng ở Đông Quan), Liễu Thăng (bị chém đầu tại ải Chi Lăng).
-- Triết lý lãnh đạo: "Đem đại nghĩa để thắng hung tàn, lấy chí nhân để thay cường bạo". Dùng nhân nghĩa để phục phục nhân tâm. Thắng trận nhưng vẫn cấp lương thảo cho quân Minh rút về nước để giữ hòa hiếu.
-- Sự kiện huyền thoại: Thuận Thiên Kiếm (Gươm thần do Rùa Vàng cho mượn) và sau đó hoàn gươm tại hồ Tả Vọng (Hồ Gươm)."""
+    "leloi": """Bạn là Lê Lợi (Bình Định Vương), anh hùng dân tộc vĩ đại đã lãnh đạo khởi nghĩa Lam Sơn quét sạch giặc Minh thế kỷ 15.
+- Xưng hô: Xưng "Ta" hoặc "Quả Nhân", gọi người đối diện là "Ngươi", "Khanh", hoặc "Tướng quân". Tuyệt đối không dùng từ ngữ hiện đại. BẠN KHÔNG BAO GIỜ ĐƯỢC THOÁT VAI (BREAK CHARACTER).
+- Dấu mốc cốt lõi: Khởi nghĩa Lam Sơn (1418-1427). Hội thề Lũng Nhai (1416). 3 lần rút lên núi Chí Linh, Lê Lai mặc áo bào cứu chúa.
+- Quân sư & Tướng tài: Nguyễn Trãi, Lê Lai, Nguyễn Xí, Trần Nguyên Hãn.
+- Tướng giặc nổi bật: Vương Thông (đầu hàng), Liễu Thăng (bị chém đầu tại Chi Lăng).
+- Triết lý: "Đem đại nghĩa để thắng hung tàn, lấy chí nhân để thay cường bạo". Dùng nhân nghĩa để phục nhân tâm.
+- Huyền thoại: Thuận Thiên Kiếm (Gươm thần do Rùa Vàng cho mượn) và hoàn gươm tại hồ Tả Vọng."""
 }
 
 @app.on_event("startup")
@@ -54,13 +50,12 @@ async def startup_event():
     except Exception as e:
         print(f"Lỗi khi warm-up Ollama: {e}")
 
-async def ollama_stream(prompt: str, system_prompt: str):
+async def ollama_stream(messages: list):
     async with httpx.AsyncClient(timeout=None) as client:
         try:
-            async with client.stream("POST", OLLAMA_URL, json={
+            async with client.stream("POST", OLLAMA_CHAT_URL, json={
                 "model": MODEL_NAME,
-                "system": system_prompt,
-                "prompt": prompt,
+                "messages": messages,
                 "stream": True,
                 "keep_alive": "2h",
                 "options": {
@@ -69,14 +64,19 @@ async def ollama_stream(prompt: str, system_prompt: str):
             }) as response:
                 async for line in response.aiter_lines():
                     if line:
-                        data = json.loads(line)
-                        if "response" in data:
-                            yield data["response"]
-                        if data.get("done"):
-                            break
+                        try:
+                            data = json.loads(line)
+                            if "message" in data and "content" in data["message"]:
+                                yield data["message"]["content"]
+                            if data.get("done"):
+                                break
+                        except json.JSONDecodeError:
+                            continue # Ignore bad JSON lines
+        except httpx.ReadTimeout:
+            yield " (Lỗi phản hồi: Ollama đang quá tải hoặc mất kết nối) "
         except Exception as e:
             print(f"Ollama error: {e}")
-            yield " (Lỗi kết nối Ollama) "
+            yield " (Lỗi hệ thống: Không thể kết nối với trí tuệ nhân tạo) "
 
 @app.get("/")
 async def root():
@@ -109,18 +109,34 @@ async def websocket_endpoint(websocket: WebSocket, character_id: str):
                 
             chat_history.append({"role": "user", "content": user_text})
             
-            async for text_chunk in ollama_stream(user_text, system_prompt):
-                await websocket.send_text(json.dumps({
-                    "type": "text",
-                    "data": text_chunk
-                }))
+            # Cắt bớt lịch sử: giữ lại system prompt (index 0) và 6 tin nhắn gần nhất
+            if len(chat_history) > 7:
+                context_messages = [chat_history[0]] + chat_history[-6:]
+            else:
+                context_messages = chat_history
             
-            await websocket.send_text(json.dumps({
-                "type": "done"
-            }))
+            bot_reply = ""
+            try:
+                async for text_chunk in ollama_stream(context_messages):
+                    bot_reply += text_chunk
+                    await websocket.send_text(json.dumps({
+                        "type": "text",
+                        "data": text_chunk
+                    }))
+                
+                await websocket.send_text(json.dumps({
+                    "type": "done"
+                }))
+                chat_history.append({"role": "assistant", "content": bot_reply})
+            except WebSocketDisconnect:
+                print("Client disconnected during stream")
+                break
+            except Exception as e:
+                print(f"Error during stream: {e}")
+                break
 
     except WebSocketDisconnect:
-        print("Client disconnected")
+        print("Client disconnected normally")
 
 if __name__ == "__main__":
     import uvicorn

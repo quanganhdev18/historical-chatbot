@@ -6,6 +6,12 @@ Hệ thống có 2 chế độ chính:
 - **Đàm Đạo Tự Do**: Trò chuyện tự do với AI.
 - **Visual Novel (Dấu Ấn Cửu Chân)**: Game nhập vai cốt truyện rẽ nhánh đa kết thúc.
 
+## Các Tính Năng Mới (Đã Cập Nhật)
+- **Tối Ưu Giao Diện (Aesthetics)**: Hiệu ứng Micro-animations, Typography với Google Fonts (Cinzel, Playfair Display), và thiết kế bóng đổ "Premium".
+- **Hệ Thống Thu Thập Hiện Vật (Collectibles)**: Tương tác với AI qua các từ khóa ẩn để mở khóa "Bạch Tượng", "Gươm Thuận Thiên"... và lưu trữ trong Hành Trang.
+- **Dòng Thời Gian Tương Tác (Mini Timeline)**: Dễ dàng xem các mốc sự kiện quan trọng và nhấn vào để tự động hỏi AI.
+- **Bộ Nhớ Ngữ Cảnh Nâng Cao**: Sử dụng `/api/chat` giúp Ollama ghi nhớ mượt mà ngữ cảnh lịch sử.
+
 ## Yêu cầu hệ thống
 1. [Node.js](https://nodejs.org/) (để chạy Frontend)
 2. [Python 3.10+](https://www.python.org/) (để chạy Backend)
