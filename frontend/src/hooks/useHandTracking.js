@@ -112,12 +112,12 @@ export function useHandTracking({ onWaveLeft, onWaveRight, onPinchRelease, coold
               let currentZone = currentZoneRef.current;
               
               if (currentZone === 'center') {
-                 if (wristX > 0.75) currentZone = 'left';
-                 else if (wristX < 0.25) currentZone = 'right';
+                 if (wristX > 0.65) currentZone = 'left';  // Dễ vươn tay sang trái hơn (trước là 0.75)
+                 else if (wristX < 0.35) currentZone = 'right'; // Dễ vươn tay sang phải hơn (trước là 0.25)
               } else if (currentZone === 'left') {
-                 if (wristX < 0.60) currentZone = 'center'; // Phải đưa tay sâu vào giữa mới thoát khỏi Left
+                 if (wristX < 0.55) currentZone = 'center'; // Rút tay về gần giữa (0.55) để thoát Left
               } else if (currentZone === 'right') {
-                 if (wristX > 0.40) currentZone = 'center'; // Phải đưa tay sâu vào giữa mới thoát khỏi Right
+                 if (wristX > 0.45) currentZone = 'center'; // Rút tay về gần giữa (0.45) để thoát Right
               }
 
               const previousZone = currentZoneRef.current;

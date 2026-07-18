@@ -4,6 +4,16 @@ import ParticleAvatar from "./ParticleAvatar";
 
 export default function FreeChatMode({ character, onBack }) {
   const [inputText, setInputText] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
+  const startTextRef = useRef("");
+  const textRef = useRef(""); // Track text for auto-restart
+  const intendedActiveRef = useRef(false); // Track user's toggle state
+  const silenceTimeoutRef = useRef(null); // Track silence to auto send
+
+  useEffect(() => {
+    textRef.current = inputText;
+  }, [inputText]);
 
   const WS_URL = `ws://localhost:8000/ws/chat/${character}`;
   const { isConnected, messages, sendMessage, isReceiving } =
@@ -17,10 +27,139 @@ export default function FreeChatMode({ character, onBack }) {
     }
   }, [messages]);
 
+  // --- Khởi tạo Speech Recognition ---
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'vi-VN';
+      recognition.continuous = true; // Bật chế độ liên tục, không tự động ngắt khi có khoảng lặng
+      recognition.interimResults = true; // Trả về kết quả tạm thời để hiển thị realtime
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onresult = (event) => {
+        // Chống dội (bounce) sự kiện sau khi đã bấm Gửi hoặc đã chủ động tắt Mic
+        if (!intendedActiveRef.current) return;
+
+        let currentTranscript = '';
+        // Duyệt toàn bộ các kết quả từ 0 để lấy câu hoàn chỉnh nhất trong phiên thu âm này
+        for (let i = 0; i < event.results.length; ++i) {
+          currentTranscript += event.results[i][0].transcript;
+        }
+        // Nối chuỗi nhận diện được vào text đã có trước đó
+        const newText = startTextRef.current + (startTextRef.current && currentTranscript ? " " : "") + currentTranscript;
+        setInputText(newText);
+
+        // Reset timer đếm khoảng lặng
+        if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
+        
+        // Cài đặt đếm ngược 2.5 giây. Nếu không có kết quả mới (ngưng nói), sẽ tự động gửi.
+        silenceTimeoutRef.current = setTimeout(() => {
+          if (textRef.current && textRef.current.trim() !== '') {
+            // Tắt mic
+            intendedActiveRef.current = false;
+            setIsListening(false);
+            if (recognitionRef.current) recognitionRef.current.stop();
+            
+            // Gửi tin nhắn
+            if (!isReceiving) {
+              sendMessage(textRef.current);
+              startTextRef.current = ""; // Reset buffer an toàn
+              setInputText('');
+            }
+          }
+        }, 2500);
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        if (event.error === 'network') {
+          alert("Lỗi Mạng (Network): Trình duyệt của bạn không kết nối được với máy chủ nhận diện giọng nói. Điều này thường xảy ra nếu bạn bị mất mạng, hoặc trình duyệt bạn đang dùng (như Brave, Firefox, Opera) không có quyền truy cập vào Google Speech API. Vui lòng mở trang web này bằng Google Chrome hoặc Microsoft Edge!");
+          intendedActiveRef.current = false;
+          setIsListening(false);
+        } else if (event.error === 'not-allowed' || event.error === 'audio-capture') {
+          intendedActiveRef.current = false;
+          setIsListening(false);
+        }
+      };
+
+      recognition.onend = () => {
+        // Nếu user chưa chủ động tắt, hệ thống sẽ tự động bật lại mic
+        if (intendedActiveRef.current) {
+          startTextRef.current = textRef.current; // Cập nhật text mới nhất để nối tiếp
+          setTimeout(() => {
+            if (intendedActiveRef.current && recognitionRef.current) {
+              try {
+                recognitionRef.current.start();
+              } catch (e) {}
+            }
+          }, 100); // Thêm delay 100ms để tránh vòng lặp vô tận gây lag nếu mic bị lỗi
+        } else {
+          setIsListening(false);
+        }
+      };
+
+      recognitionRef.current = recognition;
+    } else {
+      console.warn("Trình duyệt không hỗ trợ Web Speech API.");
+    }
+  }, []);
+
+  const toggleListen = () => {
+    if (!recognitionRef.current) {
+      alert("Trình duyệt của bạn không hỗ trợ nhận diện giọng nói. Vui lòng sử dụng Google Chrome.");
+      return;
+    }
+
+    if (intendedActiveRef.current) {
+      intendedActiveRef.current = false;
+      setIsListening(false);
+      recognitionRef.current.stop();
+      if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
+    } else {
+      intendedActiveRef.current = true;
+      startTextRef.current = inputText; // Lưu lại text đang gõ dở
+      
+      // Ép trình duyệt cấp quyền Microphone một cách tường minh trước khi bật WebSpeechAPI
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+          // Tắt stream này đi vì WebSpeechAPI sẽ tự mở stream riêng
+          stream.getTracks().forEach(track => track.stop());
+          
+          if (intendedActiveRef.current && recognitionRef.current) {
+            try {
+              recognitionRef.current.start();
+            } catch (e) {
+              console.error("Không thể bắt đầu thu âm:", e);
+            }
+          }
+        })
+        .catch(err => {
+          alert("Lỗi Micro: Vui lòng cho phép trình duyệt sử dụng Micro của bạn. Chi tiết: " + err.message);
+          intendedActiveRef.current = false;
+          setIsListening(false);
+        });
+    }
+  };
+
   const handleSendText = () => {
+    if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
+    
     if (inputText.trim() && !isReceiving) {
       const text = inputText;
+      
+      // Chủ động tắt mic nếu đang bật
+      if (intendedActiveRef.current) {
+        intendedActiveRef.current = false;
+        setIsListening(false);
+        if (recognitionRef.current) recognitionRef.current.stop();
+      }
+
       sendMessage(text);
+      startTextRef.current = ""; // Reset buffer an toàn
       setInputText("");
     }
   };
@@ -201,15 +340,28 @@ export default function FreeChatMode({ character, onBack }) {
             type="text"
             className="chat-input"
             placeholder={
-              character === "batrieu"
-                ? "Bạn muốn hỏi điều gì..."
-                : "Bạn muốn hỏi điều gì..."
+              isListening ? "Đang nghe... (Hãy nói gì đó)" : "Bạn muốn hỏi điều gì..."
             }
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSendText()}
             disabled={!isConnected || isReceiving}
           />
+          <button
+            className={`btn-primary ${isListening ? 'listening-pulse' : ''}`}
+            style={{ 
+              fontWeight: "800", 
+              fontSize: '1.2rem', 
+              padding: '10px 20px',
+              background: isListening ? 'rgba(239, 68, 68, 0.8)' : '', // Đỏ khi đang thu âm
+              borderColor: isListening ? '#fca5a5' : ''
+            }}
+            onClick={toggleListen}
+            disabled={!isConnected || isReceiving}
+            title="Thu âm bằng giọng nói"
+          >
+            🎤
+          </button>
           <button
             className="btn-primary"
             style={{ fontWeight: "800" }}

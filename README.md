@@ -12,6 +12,10 @@ Hệ thống có 2 chế độ chính:
   - Không cần chạm chuột! Sử dụng camera để nhận diện tay.
   - **Đưa tay trái / Đưa tay phải**: Dùng để chọn nhân vật hoặc đưa ra các quyết định trong chế độ Cốt Truyện.
   - **Chụm nhả ngón tay (Pinch & Release)**: Dùng để quay lại hoặc bỏ qua hiệu ứng chữ. Nhận diện cực nhạy nhờ thuật toán chống nhiễu (Hysteresis) và căn chỉnh theo tỷ lệ bàn tay (Scale-independent).
+- **Giao Tiếp Bằng Giọng Nói (Speech-to-Text)**:
+  - Tích hợp **Web Speech API** nhận diện tiếng Việt cực kỳ chính xác.
+  - **Rảnh tay hoàn toàn**: Tự động gửi tin nhắn khi bạn ngưng nói (Auto-send).
+  - **Chống nhiễu thông minh**: Chế độ Toggle vững chắc và cơ chế chống dội (Anti-bounce) giúp Micro hoạt động kiên cường kể cả trong môi trường ồn ào.
 - **Thiết Kế Đậm Chất Điện Ảnh (Cinematic UI)**: 
   - Giao diện Premium với hiệu ứng chuyển cảnh hố đen thời gian (Time Vortex).
   - Phân chia màn hình (Split Screen) độc đáo khi chọn nhân vật.
@@ -22,6 +26,8 @@ Hệ thống có 2 chế độ chính:
 1. [Node.js](https://nodejs.org/) (để chạy Frontend)
 2. [Python 3.10+](https://www.python.org/) (để chạy Backend)
 3. Webcam/Camera (để sử dụng tính năng Hand Tracking)
+4. Microphone (để sử dụng tính năng Nhận diện Giọng nói)
+5. Trình duyệt **Google Chrome** hoặc **Microsoft Edge** (Bắt buộc để sử dụng Speech-to-Text bản quyền Google)
 
 ---
 
