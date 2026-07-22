@@ -1,9 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 
-export default function ParticleAvatar({ character }) {
+export default function ParticleAvatar({ character, ecoMode = false }) {
   const canvasRef = useRef(null);
 
+  const glowColor = character === 'batrieu' ? 'rgba(217, 119, 6, 0.4)' : 'rgba(250, 204, 21, 0.4)';
+
   useEffect(() => {
+    if (ecoMode) return; // Skip animation calculations in Eco Mode
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -134,9 +137,27 @@ export default function ParticleAvatar({ character }) {
       canvas.removeEventListener('mouseenter', handleMouseEnter);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [character]);
+  }, [character, ecoMode]);
 
-  const glowColor = character === 'batrieu' ? 'rgba(217, 119, 6, 0.4)' : 'rgba(250, 204, 21, 0.4)';
+  if (ecoMode) {
+    const symbol = character === 'batrieu' ? '🐘' : '👑';
+    return (
+      <div style={{ 
+        width: '45px', 
+        height: '45px', 
+        borderRadius: '50%', 
+        background: 'rgba(0,0,0,0.6)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        boxShadow: `0 0 15px ${glowColor}`,
+        flexShrink: 0,
+        fontSize: '1.4rem'
+      }}>
+        {symbol}
+      </div>
+    );
+  }
 
   return (
     <div style={{ 

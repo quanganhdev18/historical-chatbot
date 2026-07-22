@@ -34,7 +34,16 @@ export function useWebSocket(url) {
             if (newMessages.length > 0 && newMessages[newMessages.length - 1].sender === 'bot') {
               newMessages[newMessages.length - 1].text = currentBotMessageRef.current;
             } else {
-              newMessages.push({ id: Date.now(), sender: 'bot', text: currentBotMessageRef.current });
+              newMessages.push({ id: Date.now(), sender: 'bot', text: currentBotMessageRef.current, sources: [] });
+            }
+            return newMessages;
+          });
+        } else if (payload.type === 'sources') {
+          // Attach sources to the currently streaming bot message
+          setMessages(prev => {
+            const newMessages = [...prev];
+            if (newMessages.length > 0 && newMessages[newMessages.length - 1].sender === 'bot') {
+              newMessages[newMessages.length - 1].sources = payload.sources || [];
             }
             return newMessages;
           });
@@ -56,12 +65,17 @@ export function useWebSocket(url) {
     };
   }, [connect]);
 
-  const sendMessage = useCallback((text) => {
+  const sendMessage = useCallback((text, extraPayload = {}) => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
       setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text }]);
       currentBotMessageRef.current = "";
       setIsReceiving(true);
-      wsRef.current.send(JSON.stringify({ text }));
+      
+      const payload = {
+        text,
+        ...extraPayload
+      };
+      wsRef.current.send(JSON.stringify(payload));
     } else {
       console.error("WebSocket is not connected");
     }
