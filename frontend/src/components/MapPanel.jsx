@@ -75,7 +75,7 @@ const MAP_LOCATIONS = {
       icon: '⛰️',
       x: 100,
       y: 50,
-      desc: 'Nơi nghĩa quân ẩn mình gian khổ, chịu đói ăn rễ cây rừng. Nơi người anh hùng Lê Lai cải trang hi sinh cứu Chúa công.',
+      desc: 'Nơi nghĩa quân ẩn mình gian khổ, chịu đói ăn rễ cây rừng. Nơi người anh hùng Lê Lai cải trang hy sinh cứu Chúa công.',
       address: 'Huyện Lang Chánh, Thanh Hóa',
       modernLabel: 'Khu đền thờ Chí Linh ngày nay',
       ancientLabel: 'Căn cứ ẩn quân gian khổ xưa',
@@ -373,7 +373,7 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
           </div>
         ) : (
           <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem' }}>
-            Chọn một địa điểm trên bản đồ để xem chi tiết sử tích.
+            Chi tiết các địa danh di tích lịch sử.
           </div>
         )}
       </div>

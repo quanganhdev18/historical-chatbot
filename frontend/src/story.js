@@ -1,539 +1,383 @@
 export const STORY_BATRIEU = {
-  // HỒI 1: LỜI THỀ TRÊN NÚI NƯA
+  // HỒI 1: NĂM 248 - LỜI THỀ TRÊN NÚI NƯA
   start: {
-    chapter: "HỒI 1: LỜI THỀ TRÊN NÚI NƯA",
+    chapter: "HỒI 1: LỜI THỀ TRÊN NÚI NƯA (NĂM 248)",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
     emotion: "solemn",
-    sfx: "wind",
-    text: "Năm 248 Dương Lịch. Sương đêm phủ kín ngàn Nưa lạnh buốt. Tại sảnh đường, những tiếng tranh cãi gay gắt vang lên. Triệu Thị Trinh năm nay 23 tuổi, thân hình cao lớn, võ nghệ siêu quần, đang bị các trưởng lão trong họ ép phải lấy chồng thay vì tụ tập dân đinh luyện võ. Bạn - một phó tướng kiêm quân sư thân tín - đang đứng ngoài cửa nghe lén.",
+    text: "Năm 248, Đông Ngô áp đặt ách cai trị hà khắc lên Giao Châu. Tại ngàn Nưa, Triệu Thị Trinh đứng trước ngã rẽ định mệnh. Trưởng tộc ép nàng làm tì thiếp cho viên quan thú Đông Ngô để đổi lấy sự bình yên giả tạo cho gia tộc. Trong gian phòng tĩnh lặng, ánh nến leo lắt chiếu lên khuôn mặt kiên nghị của nàng. Nàng nhìn bạn, vị quân sư tâm giao. 'Ta thà ngọc nát còn hơn ngói lành. Nhưng sinh mạng của cả gia tộc đang đè nặng lên vai ta.'",
     choices: [
-      { label: "⚔️ Bức xúc đẩy cửa bước vào bênh vực Bà Triệu", nextId: "act1_support" },
-      { label: "📜 Khẽ gõ cửa, bước vào khuyên can nhẹ nhàng để giữ hòa khí", nextId: "act1_advise" }
-    ]
-  },
-  act1_support: {
-    chapter: "HỒI 1: LỜI THỀ TRÊN NÚI NƯA",
-    speaker: "Trưởng Lão Triệu Gia",
-    avatar: "👴",
-    emotion: "angry",
-    sfx: "slam",
-    text: "(Đập bàn giận dữ) Kẻ bề dưới câm miệng! Phận nữ nhi nương nhờ cửa họ, đến tuổi cập kê không gả chồng sinh con, lại ngày ngày vác gươm múa giáo xúi giục phản loạn. Mày định kéo cả họ Triệu này tru di cửu tộc hay sao?",
-    choices: [
-      { label: "💥 Tranh cãi lại: 'Nước mất nhà tan, sao cam chịu làm nô lệ!'", nextId: "act1_batrieu_oath" },
-      { label: "🛡️ Lùi lại một bước, quay sang chờ xem Bà Triệu phản ứng", nextId: "act1_batrieu_oath" }
-    ]
-  },
-  act1_advise: {
-    chapter: "HỒI 1: LỜI THỀ TRÊN NÚI NƯA",
-    speaker: "Trưởng Lão Triệu Gia",
-    avatar: "👴",
-    emotion: "neutral",
-    sfx: "wind",
-    text: "(Vuốt râu) Phó tướng nói phải. Thị Trinh, con nên biết nhẫn nhịn. Sức đàn bà con gái sao chống lại được quan binh Đông Ngô? Chi bằng ta gả con cho tên quan thú họ Tôn, vừa êm chuyện lại có chỗ dựa quyền thế.",
-    choices: [
-      { label: "🤝 Gật gù hùa theo trưởng lão để xoa dịu tình hình", nextId: "act1_batrieu_oath" },
-      { label: "⚡ Liếc nhìn sắc mặt Bà Triệu đang lập tức biến đổi...", nextId: "act1_batrieu_oath" }
-    ]
-  },
-  act1_batrieu_oath: {
-    chapter: "HỒI 1: LỜI THỀ TRÊN NÚI NƯA",
-    speaker: "Bà Triệu",
-    avatar: "👸",
-    emotion: "heroic",
-    sfx: "sword",
-    text: "(Rút phăng thanh gươm chém đứt góc bàn, ánh mắt rực lửa) Các người nghe cho rõ đây! Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, đánh đuổi quân Ngô, giành lại giang sơn, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp cho người!",
-    choices: [
-      { label: "🚩 Quỳ xuống thề nguyện: 'Xin nguyện theo chủ tướng đến cùng!'", nextId: "act2_start" },
-      { label: "⚔️ Nhiệt huyết sôi trào: 'Tôi sẽ làm tiên phong phá giặc!'", nextId: "act2_start" }
+      { label: "⚔️ [QUYẾT BẤT KHẤU] Rút gươm chém góc bàn, dấy binh khởi nghĩa bất chấp sự phản đối", nextId: "act1_heroic_path" },
+      { label: "📜 [TƯƠNG KẾ TỰU KẾ] Giả vờ ưng thuận, dùng chính sính lễ của giặc để chiêu binh mãi mã", nextId: "act1_tactical_path" }
     ]
   },
 
-  // HỒI 2: THUẦN PHỤC VOI TRẮNG
-  act2_start: {
-    chapter: "HỒI 2: THUẦN PHỤC VOI TRẮNG",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "horn",
-    text: "Sau lời thề vang dội ấy, Bà Triệu dựng cờ khởi nghĩa. Thanh thế ngày một lớn. Bấy giờ ở vùng núi Quan Yên xuất hiện một con voi trắng vô cùng hung tợn, thường xuyên phá hoại mùa màng. Bà Triệu quyết tâm thu phục voi trắng làm thú cưỡi ra trận. Cả đoàn vây ráp voi trắng bên vách đá.",
-    choices: [
-      { label: "🏹 [Chiến Thuật] Khuyên dùng giáo mác và tên độc để đánh khuất phục voi", nextId: "act2_force" },
-      { label: "🍌 [Chiến Thuật] Khuyên đào hố bẫy, sau đó dụ voi bằng mía và chuối", nextId: "act2_tame" }
-    ]
-  },
-  act2_force: {
-    chapter: "HỒI 2: THUẦN PHỤC VOI TRẮNG",
-    speaker: "Bà Triệu",
-    avatar: "👸",
-    emotion: "angry",
-    sfx: "battle",
-    text: "Thú dữ phải trị bằng đao kiếm! Phó tướng, hạ lệnh bắn tên xước da nó, buộc nó lùi vào vách đá cạn kiệt thể lực cho Ta!",
-    choices: [
-      { label: "💥 Tiến hành tấn công voi trắng không thương tiếc", nextId: "act2_force_result" },
-      { label: "🏹 Bắn cảnh cáo để đe doạ thay vì lấy mạng", nextId: "act2_force_result" }
-    ]
-  },
-  act2_force_result: {
-    chapter: "HỒI 2: THUẦN PHỤC VOI TRẮNG",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "thunder",
-    text: "Con voi trắng điên cuồng chống trả, giẫm chết hàng chục nghĩa quân. Cuối cùng, vì kiệt sức và mất máu, nó gục xuống và chịu khuất phục. Bà Triệu có được voi thần nhưng lòng quân ít nhiều hoang mang vì sự tàn nhẫn và tổn thất quá lớn.",
-    choices: [
-      { label: "📣 Trấn an quân lính: 'Sự hi sinh là cần thiết cho đại sự'", nextId: "act3_start_ruthless" },
-      { label: "🛡️ Chấp nhận tổn thất để đạt mục đích lớn hơn", nextId: "act3_start_ruthless" }
-    ]
-  },
-  act2_tame: {
-    chapter: "HỒI 2: THUẦN PHỤC VOI TRẮNG",
+  act1_heroic_path: {
+    chapter: "NHÁNH 1: HÙNG KHÍ BỒ ĐIỀN",
     speaker: "Bà Triệu",
     avatar: "👸",
     emotion: "heroic",
-    sfx: "wind",
-    text: "Con voi này có linh tính, đánh nó bằng vũ lực chỉ thu được cái xác không hồn. Ta sẽ nghe ngươi. Giăng bẫy nhưng tuyệt đối không làm nó xước một giọt máu. Ta sẽ tự mình xuống hầm dụ nó.",
+    text: "(Lưỡi gươm sáng loáng vung lên, góc bàn bằng gỗ lim rụng xuống) 'Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông! Chứ không chịu khom lưng làm tì thiếp cho người!' Lời thề vang vọng, nhưng ánh mắt nàng thoáng một tia đau đớn khi thấy anh trai Triệu Quốc Đạt lắc đầu quay đi. Nàng biết, con đường này sẽ phải trả giá bằng rất nhiều máu.",
     choices: [
-      { label: "🍌 Chuẩn bị hoa quả và thức ăn thả xuống hầm", nextId: "act2_tame_result" },
-      { label: "🤝 Trực tiếp hỗ trợ Bà Triệu vỗ về voi trắng", nextId: "act2_tame_result" }
-    ]
-  },
-  act2_tame_result: {
-    chapter: "HỒI 2: THUẦN PHỤC VOI TRẮNG",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "victorious",
-    sfx: "horn",
-    text: "Dưới hầm bẫy, Bà Triệu kiên nhẫn nhiều ngày ròng rã trò chuyện, vuốt ve và cho voi ăn. Cảm mến sự chân thành và oai phong của Nữ tướng, voi trắng ngoan ngoãn cúi đầu cho Bà cưỡi. Tiếng tăm Bà Triệu như một nữ thần vang dội khắp Giao Châu.",
-    choices: [
-      { label: "🔥 Sĩ khí quân đội dâng cao vút đến tận mây xanh", nextId: "act3_start_compassion" },
-      { label: "🚩 Tự hào đứng chung hàng ngũ dưới bóng voi thần", nextId: "act3_start_compassion" }
+      { label: "🐘 [THUẦN PHỤC VOI TRẮNG] Một mình vào rừng sâu, dùng nhu thắng cương thuần phục Voi Thần", nextId: "act2_elephant_battle" },
+      { label: "🔥 [HỎA CÔNG BỒ ĐIỀN] Dùng chiến thuật du kích, tập kích kho lương giặc ngay trong đêm", nextId: "act2_fire_siege" }
     ]
   },
 
-  // HỒI 3: KẺ PHẢN BỘI VÀ ÁP LỰC CHỈ HUY
-  act3_start_ruthless: {
-    chapter: "HỒI 3: KẺ PHẢN BỘI VÀ ÁP LỰC CHỈ HUY",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "thunder",
-    text: "Năm 248. Thứ sử Giao Châu là Lục Dận đem 8.000 quân tinh nhuệ sang đàn áp. Trong lúc dầu sôi lửa bỏng, một toán lính bị phát hiện lén mang mật thư dâng nộp phòng tuyến cho Lục Dận.",
-    choices: [
-      { label: "⛓️ Lập tức trói chặt chúng giải lên trướng", nextId: "act3_traitor_ruthless" },
-      { label: "📜 Khám xét thu giữ toàn bộ mật thư làm bằng chứng", nextId: "act3_traitor_ruthless" }
-    ]
-  },
-  act3_traitor_ruthless: {
-    chapter: "HỒI 3: KẺ PHẢN BỘI VÀ ÁP LỰC CHỈ HUY",
+  act2_elephant_battle: {
+    chapter: "NHÁNH 1A: THUẦN PHỤC VOI THẦN",
     speaker: "Bà Triệu",
     avatar: "👸",
-    emotion: "angry",
-    sfx: "sword",
-    text: "(Nhìn xuống những kẻ phản bội đang run rẩy) Bọn cặn bã! Ta đã ban cho các ngươi cơ hội thoát kiếp nô lệ, vậy mà các ngươi lại cắn ngược lại ta. Phó tướng, hãy lôi bọn chúng ra pháp trường chém đầu bêu cọc, tru di cửu tộc cho Ta!",
-    choices: [
-      { label: "⚔️ Vâng lệnh! Xử quyết không tha để lập uy!", nextId: "act4_start_dark" },
-      { label: "🕊️ Chỉ chém kẻ cầm đầu, tha cho gia đình chúng để lấy lòng nhân tâm", nextId: "act4_start_normal" }
-    ]
-  },
-  act3_start_compassion: {
-    chapter: "HỒI 3: KẺ PHẢN BỘI VÀ ÁP LỰC CHỈ HUY",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
     emotion: "heroic",
-    sfx: "drum",
-    text: "Nhờ uy danh voi thần, quân khởi nghĩa chiến đấu vô cùng anh dũng cản bước Lục Dận. Tuy nhiên, nội bộ binh lính bắt đầu lung lay do Lục Dận tung tin đồn và mua chuộc. Đội canh gác vừa bắt được một lính tráng định đào ngũ trong đêm.",
+    text: "Đối mặt với Voi Trắng hung bạo, nàng không dùng vũ lực mà dùng sự kiên nhẫn và lòng trắc ẩn để cảm hóa. Ngày xuất quân, nàng mặc áo giáp vàng, cưỡi Voi Trắng, uy phong lẫm liệt. Lục Dẫn, tướng giặc, nhìn thấy cảnh ấy mà khiếp đảm. Nhưng bên trong, nàng nhận ra binh lực Đông Ngô quá đông, một trận chiến vỗ mặt có thể là mồ chôn của nghĩa quân.",
     choices: [
-      { label: "🗡️ Rút gươm áp giải hắn lên gặp Nữ tướng", nextId: "act3_traitor_compassion" },
-      { label: "🗣️ Khuyên hắn nên thành thật khai báo để được khoan hồng", nextId: "act3_traitor_compassion" }
-    ]
-  },
-  act3_traitor_compassion: {
-    chapter: "HỒI 3: KẺ PHẢN BỘI VÀ ÁP LỰC CHỈ HUY",
-    speaker: "Lính Đào Ngũ",
-    avatar: "🪖",
-    emotion: "fearful",
-    sfx: "wind",
-    text: "(Dập đầu khóc lóc) Xin Nữ tướng tha mạng! Ở nhà con còn mẹ già mù lòa không ai chăm sóc. Con không muốn phản quốc, con chỉ quá sợ chết... Con không muốn đánh nữa!",
-    choices: [
-      { label: "⚔️ Quân pháp bất vị thân! Xin Bà cho chém đầu lập uy!", nextId: "act4_start_normal" },
-      { label: "🕊️ Lấy đức phục nhân. Xin Bà đánh 50 roi răn đe rồi cho hắn về quê.", nextId: "act4_start_true" }
+      { label: "⚡ [MỞ ĐƯỜNG MÁU] Bỏ qua cạm bẫy, lao thẳng kiệu voi vào trung quân trảm Lục Dẫn", nextId: "ending_batrieu_heroic_victory" },
+      { label: "🚩 [TUẪN TIẾT NÚI TÙNG] Chấp nhận hy sinh, ở lại cầm chân đại quân giặc để nghĩa quân rút lui", nextId: "ending_batrieu_historical" }
     ]
   },
 
-  // HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN
-  act4_start_dark: {
-    chapter: "HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "angry",
-    sfx: "battle",
-    text: "Trận Bồ Điền nổ ra ác liệt. Đội quân của Bà Triệu chiến đấu với sự điên cuồng và khát máu. Bọn tay chân của Lục Dận bị nghiền nát dưới chân voi. Tuy nhiên, Lục Dận vô cùng nham hiểm, hắn lùa hàng ngàn bá tánh tay không tấc sắt đi đầu làm bia đỡ đạn.",
-    choices: [
-      { label: "⚔️ Nín thở chờ lệnh chủ tướng", nextId: "act4_dark_decision" },
-      { label: "💔 Nhìn hàng ngàn bá tánh mà lòng dạ đau xót", nextId: "act4_dark_decision" }
-    ]
-  },
-  act4_dark_decision: {
-    chapter: "HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN",
-    speaker: "Bà Triệu",
-    avatar: "👸",
-    emotion: "angry",
-    sfx: "fire",
-    text: "(Cười lạnh lẽo) Lục Dận, ngươi tưởng giấu trong dân là Ta không dám động thủ? Bất kì kẻ nào đứng trên chiến trường đều là kẻ thù! Phó tướng, truyền lệnh dùng hỏa tiễn! Bắn chết tất cả những kẻ cản đường!",
-    choices: [
-      { label: "🏹 Phóng tiễn! Không từ thủ đoạn để giành độc lập!", nextId: "ending_dark" },
-      { label: "🛑 Ngăn cản Bà Triệu làm việc ác, thà chết không hại dân!", nextId: "ending_bad" }
-    ]
-  },
-  act4_start_normal: {
-    chapter: "HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "thunder",
-    text: "Sự phân vân giữa kỉ luật và nhân nhượng khiến nhuệ khí nghĩa quân không thực sự kiên định. Tại trận Bồ Điền, 8.000 quân Ngô bất ngờ đột kích trong đêm, phá vỡ tuyến phòng thủ.",
-    choices: [
-      { label: "📯 Thổi tù và báo động toàn quân", nextId: "act4_normal_decision" },
-      { label: "🛡️ Mặc giáp xông thẳng ra tiền tuyến đỡ đòn", nextId: "act4_normal_decision" }
-    ]
-  },
-  act4_normal_decision: {
-    chapter: "HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN",
-    speaker: "Bà Triệu",
-    avatar: "👸",
-    emotion: "solemn",
-    sfx: "wind",
-    text: "Phó tướng! Bốn phía đều là giặc Ngô, chúng ta đã bị bao vây. Giờ không phải lúc manh động, ta còn quân đội, còn hi vọng.",
-    choices: [
-      { label: "🌲 Mở đường máu rút lui về rừng sâu bảo toàn lực lượng", nextId: "ending_normal" },
-      { label: "🏳️ Đầu hàng quân Ngô để giữ lại mạng sống cho binh lính", nextId: "ending_bad" }
-    ]
-  },
-  act4_start_true: {
-    chapter: "HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
+  act2_fire_siege: {
+    chapter: "NHÁNH 1B: HỎA CÔNG BỒ ĐIỀN",
+    speaker: "Quân Sư (Bạn)",
+    avatar: "⚔️",
     emotion: "heroic",
-    sfx: "drum",
-    text: "Nhờ ân đức của Bà Triệu, quân sĩ thề tử chiến không lùi. Tại trận quyết chiến Bồ Điền, đối diện với đạo quân giáp sắt khổng lồ của Lục Dận, người dân các làng bản lân cận tự nguyện vác gậy gộc, cuốc xẻng lao ra chiến trường hỗ trợ nghĩa quân.",
+    text: "Lửa cháy rực trời Bồ Điền. Tuy nhiên, một sự thật kinh hoàng được phơi bày: Lục Dẫn đã đoán trước được hỏa công, hắn để lại kho lương giả chứa đầy thuốc nổ! Nghĩa quân rơi vào ổ phục kích. Bà Triệu phải đưa ra quyết định tàn nhẫn nhất trong đời: cứu cánh quân tiên phong hay hy sinh họ để bảo toàn lực lượng chủ chốt.",
     choices: [
-      { label: "🚩 Đây là trận chiến cuối cùng! Giương cao ngọn cờ!", nextId: "act4_true_decision" },
-      { label: "⚔️ Siết chặt tay gươm, thề cùng sống chết với chủ tướng", nextId: "act4_true_decision" }
-    ]
-  },
-  act4_true_decision: {
-    chapter: "HỒI 4: HUYẾT CHIẾN BỒ ĐIỀN",
-    speaker: "Bà Triệu",
-    avatar: "👸",
-    emotion: "heroic",
-    sfx: "sword",
-    text: "(Mặc áo giáp vàng, rút gươm chỉ thẳng về phía quân Ngô) Hỡi bá tánh Giao Châu! Hôm nay, dẫu máu chảy thành sông, xương chất thành núi, chúng ta cũng quyết không cúi đầu làm nô lệ! Phó tướng, theo Ta xông trận!",
-    choices: [
-      { label: "⚔️ Vung giáo xông thẳng vào trung quân địch!", nextId: "ending_true" },
-      { label: "🛡️ Rút gươm thét vang bảo vệ sườn phải cho voi thần!", nextId: "ending_true" }
+      { label: "🏹 [QUYẾT TỬ CỨU VIỆN] Dẫn quân chủ lực quay lại vòng vây máu lửa cứu anh em", nextId: "ending_batrieu_fire_victory" },
+      { label: "🏰 [RÚT VỀ CỬU CHÂN] Nuốt nước mắt bỏ lại tiền quân, lui về xây dựng thành trì", nextId: "ending_batrieu_sovereignty" }
     ]
   },
 
-  // ENDINGS BÀ TRIỆU
-  ending_true: {
-    chapter: "KẾT CỤC: BẢN ANH HÙNG CA",
+  act1_tactical_path: {
+    chapter: "NHÁNH 2: TÍCH TRỮ LỰC LƯỢNG",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "solemn",
+    text: "(Nở nụ cười chua xót) 'Ta sẽ mặc áo hỉ, nhận sính lễ.' Đêm đêm, những hòm vàng bạc của giặc được bí mật tuồn ra ngàn Nưa để đúc vũ khí. Nhưng Lục Dẫn không phải kẻ ngu. Hắn sai tâm phúc cài vào làm tì nữ cho nàng. Nàng biết mình đang chơi đùa với lửa, mỗi lời nói, mỗi bước đi đều nằm trên lưỡi dao.",
+    choices: [
+      { label: "🤝 [TƯƠNG KẾ TỰU KẾ] Mua chuộc chính tì nữ của Lục Dẫn, tuồn tin giả", nextId: "act2_allied_rebellion" },
+      { label: "🕸️ [BẪY TÌNH THÂM] Dùng chính lễ rước dâu để dẫn Lục Dẫn vào ổ mai phục", nextId: "act2_ambush_trap" }
+    ]
+  },
+
+  act2_allied_rebellion: {
+    chapter: "NHÁNH 2A: KHỞI NGHĨA TOÀN DÂN",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
-    emotion: "victorious",
-    sfx: "horn",
-    text: "Bạn cùng Bà Triệu tung hoành giữa muôn trùng quân địch. Tuy chênh lệch lực lượng quá lớn, Bà Triệu chiến đấu kiên cường đến hơi thở cuối cùng. Gươm gãy, voi gục, Bà kiêu hãnh rút gươm tự vẫn tại núi Tùng vào cuối năm 248 để giữ trọn khí tiết.",
+    emotion: "heroic",
+    text: "Lục Dẫn trúng kế, điều quân rời khỏi phủ thành. Hàng vạn dân đinh Cửu Chân chờ sẵn, nhất tề nổi dậy. Tuy nhiên, trong hàng ngũ nghĩa quân xuất hiện kẻ phản bội mở cổng thành phụ cho giặc. Bà Triệu bàng hoàng nhận ra, đó chính là một vị trưởng lão trong họ tộc vì sợ hãi mà lén lút hàng Ngô. Nàng đứng trước nguy cơ bị đánh úp từ bên trong.",
+    choices: [
+      { label: "🏆 [HUYẾT CHIẾN PHỦ THÀNH] Đích thân dẫn cấm vệ quân truy tìm và tiêu diệt kẻ phản bội", nextId: "ending_batrieu_liberation" },
+      { label: "🛡️ [BỎ THÀNH RÚT LUI] Áp dụng chiến thuật vườn không nhà trống, rút lên ngàn Nưa bảo toàn lực lượng", nextId: "ending_batrieu_guerrilla_legend" }
+    ]
+  },
+
+  act2_ambush_trap: {
+    chapter: "NHÁNH 2B: BẪY HOA HỒNG",
+    speaker: "Quân Sư (Bạn)",
+    avatar: "⚔️",
+    emotion: "heroic",
+    text: "Lễ rước dâu biến thành biển máu. Lục Dẫn lọt vào hẻm Quan Yên. Nhưng hắn vạch áo, để lộ lớp giáp sắt bên trong. Hắn đã biết trước! Một cuộc đấu trí và lực lượng diễn ra ác liệt. Bà Triệu bị thương ở vai, máu nhuộm đỏ chiếc áo tân nương.",
+    choices: [
+      { label: "💥 [LIỀU MÌNH QUYẾT SÁT] Dùng thân mình làm mồi nhử, kích nổ bãi đá sập", nextId: "ending_batrieu_trap_victory" },
+      { label: "🕊️ [BẮT SỐNG TƯỚNG GIẶC] Áp sát thi triển võ nghệ, kề gươm vào cổ Lục Dẫn ép hàng", nextId: "ending_batrieu_diplomatic_triumph" }
+    ]
+  },
+
+  // Endings for Bà Triệu
+  ending_batrieu_heroic_victory: {
+    chapter: "KẾT CỤC 1A: HÙNG KHÍ NÂNG BẰNG",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "heroic",
     ending: {
-      type: "historical",
-      title: "TRUE ENDING: BẢN ANH HÙNG CA NÚI TÙNG",
-      desc: "Năm 248 Dương Lịch, Bà Triệu tuẫn tiết. Trận chiến thất bại về quân sự, nhưng tiếng vang của tình yêu tự do và khí tiết bất khuất của Nữ anh hùng dân tộc đã trở thành ngọn đuốc rực sáng muôn đời."
-    }
-  },
-  ending_dark: {
-    chapter: "KẾT CỤC: NỮ VƯƠNG ĐẪM MÁU",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "angry",
-    sfx: "fire",
-    text: "Cơn mưa tên lửa thiêu rụi cả địch lẫn dân thường. Lục Dận tử trận, Bà Triệu giành được chiến thắng vĩ đại nhưng lại đánh mất đi nhân tâm.",
-    ending: {
+      title: "🏆 ĐẠI PHÁ ĐÔNG NGÔ",
       type: "victory",
-      title: "DARK ENDING: NỮ VƯƠNG ĐẪM MÁU",
-      desc: "Bà Triệu đánh đuổi được quân Đông Ngô và lên ngôi. Tuy nhiên, đôi bàn tay vấy máu hàng ngàn người vô tội khiến vương triều lập nên bằng sự tàn nhẫn mãi chìm trong đơn độc và oán hận."
-    }
+      desc: "Trảm Tướng Lục Dẫn tại Bồ Điền. Nhưng niềm vui không trọn vẹn, anh trai nàng đã tử trận trong loạn quân. Bà Triệu gạt nước mắt, lên ngôi vị nữ vương, mang nỗi cô đơn của người đứng trên đỉnh cao quyền lực."
+    },
+    text: "(Nhìn thi hài anh trai, giọng nghẹn ngào nhưng kiên định) 'Non sông đã sạch bóng thù, nhưng máu thịt ta đã hòa vào đất mẹ.'"
   },
-  ending_normal: {
-    chapter: "KẾT CỤC: LƯU VONG RỪNG THẲM",
+
+  ending_batrieu_historical: {
+    chapter: "KẾT CỤC 1B: BẤT TỬ TRONG LỊCH SỬ",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
     emotion: "solemn",
-    sfx: "wind",
-    text: "Bạn và Bà Triệu rút lui thành công, bảo toàn được một bộ phận nghĩa quân chạy trốn vào rừng sâu.",
     ending: {
-      type: "bad",
-      title: "NORMAL ENDING: LƯU VONG RỪNG THẲM",
-      desc: "Cuộc sống trốn chui trốn nhủi trong rừng thiêng nước độc dần bào mòn ý chí chiến đấu. Không ai còn nhớ đến lời thề 'cưỡi cơn gió mạnh' năm xưa."
-    }
+      title: "🕊️ ANH LINH BẤT TỬ",
+      type: "historical",
+      desc: "Năm 248, Bà Triệu tuẫn tiết trên đỉnh núi Tùng. Nàng chọn cái chết để không sa vào tay giặc, giữ trọn vẹn khí tiết. Trước khi gieo mình, nàng mỉm cười mãn nguyện vì đã sống một đời không hối tiếc."
+    },
+    text: "Gió núi Tùng gào thét như khóc thương người nữ anh hùng, nhưng cũng là khúc tráng ca muôn thuở của tự do."
   },
-  ending_bad: {
-    chapter: "KẾT CỤC: VẾT NHƠ LỊCH SỬ",
+
+  ending_batrieu_fire_victory: {
+    chapter: "KẾT CỤC 1C: HỎA CÔNG ĐẪM MÁU",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "heroic",
+    ending: {
+      title: "🔥 THẮNG LỢI TRONG NƯỚC MẮT",
+      type: "victory",
+      desc: "Quyết tử cứu viện thành công, nhưng nghĩa quân tổn thất hơn phân nửa. Bà Triệu giành được Bồ Điền nhưng bị ám ảnh mãi bởi tiếng thét của những người anh em trong biển lửa."
+    },
+    text: "Bồ Điền rực lửa. Giặc đã tan, nhưng trái tim ta vĩnh viễn mang một vết sẹo không thể xóa nhòa."
+  },
+
+  ending_batrieu_sovereignty: {
+    chapter: "KẾT CỤC 1D: CĂN CỨ TỰ CHỦ",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "heroic",
+    ending: {
+      title: "🏰 THÀNH TRÌ CỦA SỰ DẰN VẶT",
+      type: "historical",
+      desc: "Bà Triệu xây dựng thành trì Cửu Chân tự chủ. Bà trở thành một nhà lãnh đạo sắt đá, lạnh lùng, luôn mang trong mình mặc cảm tội lỗi vì đã bỏ rơi quân tiên phong."
+    },
+    text: "Giang sơn được giữ vững, nhưng mỗi đêm ta vẫn nghe tiếng gọi của họ từ cõi chết vọng về."
+  },
+
+  ending_batrieu_liberation: {
+    chapter: "KẾT CỤC 2A: GIẢI PHÓNG GIAO CHÂU",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "heroic",
+    ending: {
+      title: "🏆 GIAO CHÂU ĐỘC LẬP",
+      type: "victory",
+      desc: "Kẻ phản bội chính là người thân của nàng. Tự tay trừng trị máu mủ, Bà Triệu giải phóng Giao Châu, thiết lập một chính quyền nghiêm minh, không khoan nhượng."
+    },
+    text: "Pháp luật vô tình. Ta phải tự tay chặt đi cành sâu để cứu lấy cái cây đại thụ mang tên Giao Châu."
+  },
+
+  ending_batrieu_guerrilla_legend: {
+    chapter: "KẾT CỤC 2B: NGÀN NƯA HUYỀN THOẠI",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
-    emotion: "fearful",
-    sfx: "thunder",
-    text: "Lựa chọn sai lầm khiến hệ thống phòng thủ sụp đổ. Bạn và Bà Triệu bị giặc bắt và chịu cảnh làm tù binh nhục nhã.",
+    emotion: "solemn",
     ending: {
-      type: "bad",
-      title: "BAD ENDING: VẾT NHƠ LỊCH SỬ",
-      desc: "Bị lột giáp vàng, xích tay diễu phố. Sự hèn nhát và thiếu quyết đoán đã dẫn đến một thảm kịch đáng xấu hổ."
-    }
+      title: "🛡️ HUYỀN THOẠI DU KÍCH",
+      type: "historical",
+      desc: "Rút về ngàn Nưa, Bà Triệu trở thành bóng ma ám ảnh quân Ngô. Nàng hy sinh hạnh phúc cá nhân, hóa thân thành thần rừng bảo vệ quê hương."
+    },
+    text: "Người ta không còn thấy Bà Triệu bằng xương bằng thịt, chỉ thấy nỗi khiếp sợ gieo rắc lên đầu kẻ thù từ những bóng cây."
+  },
+
+  ending_batrieu_trap_victory: {
+    chapter: "KẾT CỤC 2C: HUYẾT CHIẾN QUAN YÊN",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "heroic",
+    ending: {
+      title: "💥 ĐẠI TRÚT ĐÁ SẬP",
+      type: "victory",
+      desc: "Bãi đá sập chôn vùi cả Lục Dẫn và một cánh tay của Bà Triệu. Nàng trở thành vị nữ vương độc thủ, biểu tượng của sự hy sinh tột cùng cho tự do."
+    },
+    text: "Một cánh tay đổi lấy ngàn năm độc lập. Cái giá này, Triệu Thị Trinh ta nguyện trả!"
+  },
+
+  ending_batrieu_diplomatic_triumph: {
+    chapter: "KẾT CỤC 2D: HÒA BÌNH TRÊN LƯỠI GƯƠM",
+    speaker: "Bà Triệu",
+    avatar: "👸",
+    emotion: "heroic",
+    ending: {
+      title: "🕊️ NGOẠI GIAO HÒA BÌNH",
+      type: "historical",
+      desc: "Bắt sống Lục Dẫn, ép Đông Ngô ký hòa ước. Bà Triệu nhận ra chiến tranh không chỉ giải quyết bằng gươm đao, mà bằng cả một cái đầu lạnh."
+    },
+    text: "Máu đã đổ đủ rồi. Hôm nay, ta dùng mạng sống của ngươi để mua lấy hòa bình cho bách tính."
   }
 };
 
-// ==============================================================================
-// LÊ LỢI STORY ROUTES
-// ==============================================================================
-
 export const STORY_LELOI = {
-  // HỒI 1: LỜI THỀ LŨNG NHAI
+  // HỒI 1: NĂM 1416 - HỘI THỀ LŨNG NHAI
   start: {
-    chapter: "HỒI 1: LỜI THỀ LŨNG NHAI",
+    chapter: "HỒI 1: HỘI THỀ LŨNG NHAI (NĂM 1416)",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
     emotion: "solemn",
-    sfx: "wind",
-    text: "Năm 1416 Dương Lịch. Rừng núi Lam Sơn âm u. Dưới ánh trăng, Lê Lợi cùng 18 chiến hữu cắt máu ăn thề tại Lũng Nhai, thề sống chết đánh đuổi giặc Minh xâm lược. Bạn là một trong 18 vị công thần đó. Sau buổi thề, Lê Lợi gọi bạn ở lại để bàn việc chiêu mộ nhân tài.",
+    text: "Năm 1416. Đất nước chìm trong tăm tối dưới ách đô hộ của nhà Minh. Tại Lam Sơn, Lê Lợi cùng 18 anh hùng cắt máu ăn thề. Nhưng sâu thẳm trong mắt Lê Lợi là một nỗi lo âu tột độ. Ông biết, trong số những người vừa cạn chén máu, có kẻ đang dao động trước uy quyền và tiền bạc của giặc. Một nước cờ sai, toàn bộ gia tộc và huynh đệ sẽ bị tru di.",
     choices: [
-      { label: "👑 Lắng nghe chủ định của Lê Lợi", nextId: "act1_advise" },
-      { label: "📜 Tiến lên hiến kế tuyển mộ quân sư", nextId: "act1_advise" }
-    ]
-  },
-  act1_advise: {
-    chapter: "HỒI 1: LỜI THỀ LŨNG NHAI",
-    speaker: "Lê Lợi",
-    avatar: "👑",
-    emotion: "heroic",
-    sfx: "drum",
-    text: "Nhà Minh lực lượng khổng lồ. Chỉ bằng sự quả cảm của anh em Lũng Nhai ta e là chưa đủ. Ta đang phân vân giữa hai người: Một là Nguyễn Trãi, nho sĩ mang trong mình 'Bình Ngô Sách' nhưng tay trói gà không chặt. Hai là Đinh Lễ, một mãnh tướng có thể địch vạn người. Theo khanh, ta nên ưu tiên dùng ai?",
-    choices: [
-      { label: "📜 Mời Nguyễn Trãi. Mưu phạt tâm công, trí tuệ mới là chìa khóa.", nextId: "act2_start_wisdom" },
-      { label: "⚔️ Chiêu mộ Đinh Lễ. Chiến trường là nơi lấy máu đổi máu!", nextId: "act2_start_force" }
+      { label: "🗡️ [CỐ THỦ CHÍ LINH] Lùi sâu vào núi rừng Chí Linh, dùng hiểm địa để rèn quân", nextId: "act1_oath_path" },
+      { label: "🏹 [TẤN CÔNG NGHỆ AN] Bất ngờ tiến công Nghệ An, đánh một trận phủ đầu gây tiếng vang", nextId: "act1_nghean_path" }
     ]
   },
 
-  // HỒI 2: NÚI CHÍ LINH VÀ SỰ HI SINH
-  act2_start_wisdom: {
-    chapter: "HỒI 2: NÚI CHÍ LINH VÀ SỰ HI SINH",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "wind",
-    text: "Năm 1418. Nghĩa quân Lam Sơn liên tục bị quân Minh đàn áp, buộc phải rút lên núi Chí Linh. Nhờ mưu kế của Nguyễn Trãi, quân ta tránh được nhiều tổn thất nhưng tình cảnh vẫn vô cùng bi đát. Đã mấy ngày qua, tướng sĩ chỉ ăn cỏ rễ để cầm hơi.",
+  act1_oath_path: {
+    chapter: "NHÁNH 1: ĐÊM ĐEN CHÍ LINH",
+    speaker: "Lê Lợi",
+    avatar: "🤴",
+    emotion: "heroic",
+    text: "Quân Minh bao vây núi Chí Linh. Lương thực cạn kiệt, binh sĩ phải ăn rễ cây, măng dại. Nỗi tuyệt vọng bao trùm. Một đêm, Lê Lợi phát hiện một mật thư gửi cho quân Minh rơi gần lán của một vị tướng thân tín. Niềm tin sụp đổ. Ông phải đưa ra quyết định: vạch trần kẻ phản bội và làm lung lay tinh thần quân sĩ, hay âm thầm tự mình gánh vác?",
     choices: [
-      { label: "⛺ Vào trướng gặp Lê Lợi tìm cách giải vây", nextId: "act2_chilinh_wisdom" },
-      { label: "🪖 Chấn chỉnh hàng ngũ binh sĩ đang suy sụp", nextId: "act2_chilinh_wisdom" }
+      { label: "👑 [LÊ LAI CỨU CHỦ] Ép kẻ phản bội phải lập công chuộc tội, cùng Lê Lai giả vương phá vây", nextId: "act2_lelai_sacrifice" },
+      { label: "⚔️ [TỰ MỞ ĐƯỜNG MÁU] Tiêu diệt kẻ phản bội trong im lặng, tự mình dẫn quân cảm tử xông pha", nextId: "act2_chiling_breakthrough" }
     ]
   },
-  act2_chilinh_wisdom: {
-    chapter: "HỒI 2: NÚI CHÍ LINH VÀ SỰ HI SINH",
+
+  act2_lelai_sacrifice: {
+    chapter: "NHÁNH 1A: MÁU NHUỘM HOÀNG BÀO",
     speaker: "Lê Lai",
-    avatar: "🛡️",
+    avatar: "🗡️",
     emotion: "heroic",
-    sfx: "sword",
-    text: "Chúa công! Quân giặc đã vây kín núi. Xin hãy cho thần mặc hoàng bào, cưỡi voi ra trận để giả danh Chúa công. Quân Minh tất sẽ xúm lại đánh. Thần nguyện liều thân để Chúa công thoát vòng vây!",
+    text: "(Khoác lên mình chiếc áo hoàng bào, Lê Lai mỉm cười thanh thản) 'Thần nguyện chết thay chúa công.' Nhưng Lê Lợi biết, Lê Lai không chỉ chết vì trung thành, mà còn mang theo bí mật về kẻ phản bội xuống mồ để bảo vệ danh dự cho khởi nghĩa. Nỗi đau giằng xé tâm can Lê Lợi khi nhìn bóng huynh đệ khuất dần trong vòng vây giặc.",
     choices: [
-      { label: "👘 Đồng ý để Lê Lai đi. Lấy đại cục làm trọng!", nextId: "act3_start_righteous" },
-      { label: "🛑 Kiên quyết ngăn cản, đề xuất một mưu kế nghi binh khác", nextId: "act3_start_normal" }
-    ]
-  },
-  act2_start_force: {
-    chapter: "HỒI 2: NÚI CHÍ LINH VÀ SỰ HI SINH",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "angry",
-    sfx: "battle",
-    text: "Năm 1418. Đinh Lễ quả là mãnh tướng, liên tục chém tướng đoạt cờ quân Minh. Tuy nhiên, vì thiếu chiến lược dài hạn, nghĩa quân lọt vào vòng vây khổng lồ tại núi Chí Linh. Tình hình tuyệt vọng đến mức Lê Lợi định tự vẫn để không rơi vào tay giặc.",
-    choices: [
-      { label: "🗡️ Lập tức xông vào trướng can ngăn Lê Lợi", nextId: "act2_chilinh_force" },
-      { label: "📯 Triệu tập các tướng lĩnh tìm cách phá vây", nextId: "act2_chilinh_force" }
-    ]
-  },
-  act2_chilinh_force: {
-    chapter: "HỒI 2: NÚI CHÍ LINH VÀ SỰ HI SINH",
-    speaker: "Lê Lai",
-    avatar: "🛡️",
-    emotion: "heroic",
-    sfx: "thunder",
-    text: "(Bước vào với vết thương rỉ máu) Chúa công không thể chết! Xin hãy cho thần khoác hoàng bào, đánh một trận tử chiến thu hút giặc để ngài trốn thoát. Có như vậy, máu của hàng vạn huynh đệ mới không đổ xuống vô ích!",
-    choices: [
-      { label: "😭 Rơi lệ chấp thuận sự hi sinh của người anh em", nextId: "act3_start_dark" },
-      { label: "⚔️ Không đồng ý! Cùng nhau xông ra tử chiến!", nextId: "ending_bad" }
+      { label: "🗡️ [TRẢM LIỄU THĂNG] Kìm nén bi thương, giăng bẫy ở Chi Lăng để báo thù", nextId: "ending_leloi_chilang_triumph" },
+      { label: "📜 [HỘI THỀ ĐÔNG QUAN] Dùng cái chết của Lê Lai để thức tỉnh kẻ thù, chọn con đường hòa đàm", nextId: "ending_leloi_peace" }
     ]
   },
 
-  // HỒI 3: HỘI THỀ ĐÔNG QUAN
-  act3_start_righteous: {
-    chapter: "HỒI 3: HỘI THỀ ĐÔNG QUAN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "victorious",
-    sfx: "horn",
-    text: "Lê Lai hi sinh, Lê Lợi thoát hiểm. Mười năm nếm mật nằm gai trôi qua, đạo quân Lam Sơn với mưu lược xuất quỷ nhập thần của Nguyễn Trãi đã ép Vương Thông nhà Minh phải cố thủ tại Đông Quan và xin đầu hàng.",
-    choices: [
-      { label: "🧥 Sửa soạn chiến bào, theo vua tiến vào đại doanh", nextId: "act3_righteous_decision" },
-      { label: "🚩 Vinh quang ngẩng cao đầu đi gặp mặt kẻ thù bại trận", nextId: "act3_righteous_decision" }
-    ]
-  },
-  act3_righteous_decision: {
-    chapter: "HỒI 3: HỘI THỀ ĐÔNG QUAN",
+  act2_chiling_breakthrough: {
+    chapter: "NHÁNH 1B: ĐƯỜNG MÁU",
     speaker: "Lê Lợi",
-    avatar: "👑",
+    avatar: "🤴",
     emotion: "heroic",
-    sfx: "drum",
-    text: "Vương Thông đã dâng bảng đầu hàng năm 1427. Giờ đây trong tay ta là hàng vạn tù binh quân Minh. Các tướng sĩ muốn chém giết để rửa hận cho những năm tháng lầm than. Nhưng Nguyễn Trãi lại khuyên ta nên tha chết và cấp thuyền cho chúng về nước. Ý khanh thế nào?",
+    text: "Lê Lợi tự tay hạ sát kẻ phản bội. Bàn tay ông run rẩy nhuộm máu người từng là anh em. Đêm đó, ông dẫn quân phá vây. Trương Phụ không ngờ Lê Lợi lại liều mạng đến vậy. Trận chiến đẫm máu, Lê Lợi bị thương nặng, nhưng quân Lam Sơn đã thoát khỏi tử địa. Sự tàn nhẫn của chiến tranh đã biến một tù trưởng nhân hậu thành một vị tướng sắt đá.",
     choices: [
-      { label: "🕊️ Nhân nghĩa làm gốc! Xin mở đường hiếu sinh cho tù binh.", nextId: "act4_start_true" },
-      { label: "⚔️ Bọn giặc hung tàn không đáng được tha, chém vài ngàn tên để thị uy!", nextId: "act4_start_dark" }
-    ]
-  },
-  act3_start_normal: {
-    chapter: "HỒI 3: HỘI THỀ ĐÔNG QUAN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "wind",
-    text: "Nhờ mưu kế nghi binh, cả Lê Lợi và Lê Lai đều sống sót chạy thoát khỏi Chí Linh. Tuy nhiên, cái giá phải trả là phần lớn lực lượng bị tiêu diệt. Cuộc khởi nghĩa kéo dài dằng dặc suốt 20 năm mới đánh đuổi được quân Minh.",
-    choices: [
-      { label: "🍺 Tham dự đại tiệc khao quân ăn mừng chiến thắng", nextId: "ending_normal" },
-      { label: "🕯️ Lặng lẽ ngồi nhớ về những người đã ngã xuống", nextId: "ending_normal" }
-    ]
-  },
-  act3_start_dark: {
-    chapter: "HỒI 3: HỘI THỀ ĐÔNG QUAN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "angry",
-    sfx: "fire",
-    text: "Máu của Lê Lai đã nhen nhóm ngọn lửa thù hận tột cùng. Đạo quân Lam Sơn thiện chiến và tàn nhẫn càn quét giặc Minh từ Nam chí Bắc. Tại Đông Quan, khi quân Minh xin hàng, binh sĩ của bạn khao khát được tàn sát.",
-    choices: [
-      { label: "👑 Gặp Lê Lợi xin chỉ thị xử lý tù binh", nextId: "act3_dark_decision" },
-      { label: "⚔️ Trực tiếp đề xuất phương án đồ sát", nextId: "act3_dark_decision" }
-    ]
-  },
-  act3_dark_decision: {
-    chapter: "HỒI 3: HỘI THỀ ĐÔNG QUAN",
-    speaker: "Lê Lợi",
-    avatar: "👑",
-    emotion: "angry",
-    sfx: "thunder",
-    text: "(Khuôn mặt lạnh băng, sát khí tỏa ra) Nợ máu phải trả bằng máu. Không có sự dung thứ cho loài cẩu trư! Phó tướng, mang 1 vạn hàng binh đó đi chôn sống đi!",
-    choices: [
-      { label: "💀 Tuân lệnh! Thi hành án tử hình hàng loạt!", nextId: "act4_start_dark" },
-      { label: "🕊️ Bất tuân mệnh lệnh, lén thả một bộ phận tù binh", nextId: "ending_normal" }
+      { label: "🏆 [ĐẠI PHÁ QUÂN MINH] Thừa thắng xông lên, truy kích Trương Phụ tới cùng", nextId: "ending_leloi_emperor" },
+      { label: "🚩 [THUẬN THIÊN BẢO HÙNG] Rút vào rừng sâu dưỡng thương, chờ đợi cơ hội mới", nextId: "ending_leloi_legend" }
     ]
   },
 
-  // HỒI 4: TRẢ GƯƠM THUẬN THIÊN
-  act4_start_true: {
-    chapter: "HỒI 4: TRẢ GƯƠM THUẬN THIÊN",
-    speaker: "Dòng Lịch Sử",
+  act1_nghean_path: {
+    chapter: "NHÁNH 2: NGHỆ AN CHIẾN LƯỢC",
+    speaker: "Nguyễn Chích",
     avatar: "📜",
-    emotion: "victorious",
-    sfx: "horn",
-    text: "Năm 1428 Dương Lịch. Hành động nhân nghĩa của Lê Lợi vang danh thiên hạ. Đại Cáo Bình Ngô được ban bố, đất nước đón nền thái bình. Một ngày nọ, bạn tháp tùng vua dạo thuyền trên hồ Tả Vọng. Mặt nước bỗng sủi bọt, một con rùa vàng khổng lồ ngoi lên.",
-    choices: [
-      { label: "🐢 Kinh ngạc nhìn về phía Thần Quy", nextId: "act4_true_decision" },
-      { label: "🗡️ Rút gươm chắn phía trước bảo vệ nhà vua", nextId: "act4_true_decision" }
-    ]
-  },
-  act4_true_decision: {
-    chapter: "HỒI 4: TRẢ GƯƠM THUẬN THIÊN",
-    speaker: "Kim Quy (Rùa Vàng)",
-    avatar: "🐢",
     emotion: "heroic",
-    sfx: "water",
-    text: "(Gầm gừ tĩnh tại giữa làn sóng xanh) Hỡi đấng minh quân! Giặc dữ đã tan, non sông đã liền một dải. Nay xin Hoàng đế hãy hoàn trả lại Gươm Thần Thuận Thiên cho Long Quân!",
+    text: "Quyết định tấn công Nghệ An là một nước cờ điên rồ nhưng thiên tài. Tuy nhiên, khi đánh vào Nghệ An, nghĩa quân phát hiện quân Minh đang giam giữ hàng vạn con tin là dân thường làm mộc đỡ đạn. Sự nhân nghĩa của Lê Lợi bị đặt lên bàn cân với chiến thắng của đại cuộc.",
     choices: [
-      { label: "🗡️ Nhắc nhở vua: 'Xin bệ hạ trao trả báu vật, lập đài thái bình!'", nextId: "ending_true" },
-      { label: "👑 Nhắc nhở vua: 'Gươm báu là biểu tượng quyền lực, không thể trả!'", nextId: "ending_dark" }
-    ]
-  },
-  act4_start_dark: {
-    chapter: "HỒI 4: TRẢ GƯƠM THUẬN THIÊN",
-    speaker: "Dòng Lịch Sử",
-    avatar: "📜",
-    emotion: "solemn",
-    sfx: "thunder",
-    text: "Việc tàn sát tù binh khiến triều đình nhà Minh thịnh nộ. Vương triều Hậu Lê được lập nên nhưng phủ bóng đen của bạo lực và nghi kỵ. Tại hồ Tả Vọng, Kim Quy ngoi lên đòi lại gươm thần.",
-    choices: [
-      { label: "🤐 Im lặng chờ xem Lê Lợi quyết định thế nào", nextId: "act4_dark_decision" },
-      { label: "🐢 Bàng hoàng nhìn con rùa khổng lồ ngóc đầu lên mặt nước", nextId: "act4_dark_decision" }
-    ]
-  },
-  act4_dark_decision: {
-    chapter: "HỒI 4: TRẢ GƯƠM THUẬN THIÊN",
-    speaker: "Lê Lợi",
-    avatar: "👑",
-    emotion: "angry",
-    sfx: "thunder",
-    text: "(Nắm chặt chuôi gươm Thuận Thiên) Gươm này do trẫm vào sinh ra tử mới có được. Non sông này là do máu thịt quân ta xây nên. Nay trả gươm, nhỡ ngày mai giặc phương Bắc lại tràn sang thì sao? Rùa vàng, trẫm tuyệt đối không trả!",
-    choices: [
-      { label: "🚩 Hoan hô quyết định sáng suốt của nhà vua", nextId: "ending_dark" },
-      { label: "😨 Cúi đầu lo sợ điềm gở giáng xuống vương triều", nextId: "ending_dark" }
+      { label: "💥 [MƯU KẾ BỒ ẢI] Dùng thủy quân đánh vu hồi, chấp nhận thương vong cho con tin để giành chiến thắng", nextId: "act2_boai_campaign" },
+      { label: "📜 [TÂM CÔNG ĐẠI CÁO] Đình chỉ tấn công, dùng Nguyễn Trãi viết thư khuyên hàng để cứu dân", nextId: "act2_nghean_surrender" }
     ]
   },
 
-  // ENDINGS LÊ LỢI
-  ending_true: {
-    chapter: "KẾT CỤC: TRUYỀN THUYẾT HỒ GƯƠM",
-    speaker: "Dòng Lịch Sử",
+  act2_boai_campaign: {
+    chapter: "NHÁNH 2A: HÀN CỐT BỒ ẢI",
+    speaker: "Lê Lợi",
+    avatar: "🤴",
+    emotion: "heroic",
+    text: "Trận Bồ Ải thắng lớn. Quân Minh chết như rạ. Nhưng bờ sông Trách Hãn nhuộm đỏ máu của cả giặc lẫn dân thường. Lê Lợi đứng trên đồi cao, nhìn cảnh tượng hoang tàn, tự hỏi liệu ngai vàng được xây trên xương máu bách tính có thực sự mang lại thái bình?",
+    choices: [
+      { label: "⚔️ [BẮC TIẾN CẤP TỐC] Che giấu sự dằn vặt, xua quân Bắc tiến chiếm Đông Quan", nextId: "ending_leloi_northern_conquest" },
+      { label: "🕊️ [BÌNH NGÔ ĐẠI CÁO] Lập đàn cầu siêu cho vong linh, ban bố đại cáo sám hối và tuyên ngôn độc lập", nextId: "ending_leloi_great_announcement" }
+    ]
+  },
+
+  act2_nghean_surrender: {
+    chapter: "NHÁNH 2B: DỤ HÀNG NGHỆ AN",
+    speaker: "Nguyễn Trãi",
     avatar: "📜",
-    emotion: "victorious",
-    sfx: "water",
-    text: "Lê Lợi kính cẩn nâng gươm thần ném về phía Kim Quy. Rùa vàng ngậm lấy thanh gươm sáng rực, lặn xuống đáy hồ. Hồ Tả Vọng từ đó được đổi tên thành Hồ Hoàn Kiếm.",
+    emotion: "heroic",
+    text: "Thư dụ hàng được gửi đi. Tướng Minh trong thành Nghệ An lung lay, nhưng một toán phản quân cực đoan trong hàng ngũ Lam Sơn không muốn tha thứ cho giặc, âm mưu phá hoại hòa đàm bằng cách ám sát sứ giả. Lê Lợi phải giải quyết nội loạn trước khi vãn hồi hòa bình.",
+    choices: [
+      { label: "🏆 [THANH TRỪNG NỘI BỘ] Vô tình trấn áp phe cực đoan, bảo vệ hòa đàm", nextId: "ending_leloi_sovereignty_peace" },
+      { label: "👑 [DÙNG NHÂN THU PHỤC] Tha thứ cho phe cực đoan, dùng nhân đức để cảm hóa họ", nextId: "ending_leloi_golden_era" }
+    ]
+  },
+
+  // Endings for Lê Lợi
+  ending_leloi_chilang_triumph: {
+    chapter: "KẾT CỤC 1A: MÁU ĐỔ CHI LĂNG",
+    speaker: "Lê Lợi",
+    avatar: "🤴",
+    emotion: "heroic",
     ending: {
+      title: "🏆 ĐẠI THẮNG CHI LĂNG",
       type: "victory",
-      title: "TRUE ENDING: TRUYỀN THUYẾT HỒ GƯƠM",
-      desc: "Bằng trí tuệ, lòng nhân đạo và đại nghĩa, bạn đã phò tá Lê Thái Tổ thu non sông về một mối. Tên tuổi của bạn được lưu truyền muôn đời như một công thần khai quốc vĩ đại của triều đại Hậu Lê rực rỡ nhất lịch sử."
-    }
+      desc: "Liễu Thăng mất đầu. Quân Minh thảm bại. Lê Lợi lên ngôi Hoàng Đế. Nhưng hằng đêm, ông vẫn mơ thấy ánh mắt của Lê Lai và kẻ phản bội trong đêm Chí Linh."
+    },
+    text: "Ta đã giành được giang sơn, nhưng đã đánh mất đi sự hồn nhiên của một người anh hùng Lũng Nhai thuở nào."
   },
-  ending_dark: {
-    chapter: "KẾT CỤC: VƯƠNG TRIỀU KHÁT MÁU",
-    speaker: "Dòng Lịch Sử",
+
+  ending_leloi_peace: {
+    chapter: "KẾT CỤC 1B: HÒA BÌNH CHUA XÓT",
+    speaker: "Nguyễn Trãi",
     avatar: "📜",
-    emotion: "angry",
-    sfx: "fire",
-    text: "Lê Lợi rút gươm thần chém về phía mặt nước. Kim Quy nổi giận gầm lên một tiếng, lặn mất tăm. Nước hồ bỗng chốc đục ngầu.",
+    emotion: "heroic",
     ending: {
-      type: "bad",
-      title: "DARK ENDING: VƯƠNG TRIỀU KHÁT MÁU",
-      desc: "Lòng tham quyền lực và sự nghi kị đã biến Lê Lợi thành một bạo chúa. Nhà vua lần lượt sát hại các công thần, triều đình chìm trong tắm máu."
-    }
+      title: "🕊️ HỘI THỀ ĐÔNG QUAN",
+      type: "historical",
+      desc: "Vương Thông rút quân. Đại Việt thái bình. Tuy nhiên, quyết định tha cho quân Minh khiến nhiều tướng lĩnh bất mãn, mầm mống của những cuộc thanh trừng công thần sau này đã được gieo."
+    },
+    text: "Đại nghĩa thắng hung tàn. Nhưng lòng người khó đoán, thái bình hôm nay liệu có bền lâu?"
   },
-  ending_normal: {
-    chapter: "KẾT CỤC: NGAI VÀNG CÔ ĐỘC",
+
+  ending_leloi_emperor: {
+    chapter: "KẾT CỤC 1C: HOÀNG ĐẾ SẮT ĐÁ",
+    speaker: "Lê Lợi",
+    avatar: "🤴",
+    emotion: "heroic",
+    ending: {
+      title: "👑 HOÀNG ĐẾ LÊ THÁI TỔ",
+      type: "victory",
+      desc: "Lê Lợi dẹp yên giặc ngoài, cai trị đất nước bằng bàn tay sắt. Triều đại Hậu Lê bắt đầu bằng máu và sự uy quyền tuyệt đối."
+    },
+    text: "Kẻ thù không chỉ ở ngoài cõi, mà còn ở ngay trong triều đường. Ta không thể mềm lòng."
+  },
+
+  ending_leloi_legend: {
+    chapter: "KẾT CỤC 1D: GƯƠM THẦN ẨN MÌNH",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
     emotion: "solemn",
-    sfx: "wind",
-    text: "Không có huyền thoại hồ Gươm nào xảy ra. Đất nước sạch bóng quân thù, nhưng những người huynh đệ năm xưa ở Lũng Nhai đã chẳng còn ai.",
     ending: {
-      type: "bad",
-      title: "NORMAL ENDING: NGAI VÀNG CÔ ĐỘC",
-      desc: "Một cái kết thực tế và đau thương. Bạn chọn cách cáo quan về ở ẩn vì không chịu nổi sự lạnh lẽo của chốn quan trường. Đế vương luôn phải cô độc."
-    }
+      title: "🗡️ GƯƠM THẦN THUẬN THIÊN",
+      type: "historical",
+      desc: "Lê Lợi không màng ngôi vị, trả gươm cho rùa vàng rồi lui về quy ẩn tại quê nhà Lam Sơn, để lại một huyền thoại bất tử về vị anh hùng vô danh."
+    },
+    text: "Quyền lực là phù du. Giang sơn thái bình, đó là lúc người cầm gươm nên trở về với ruộng đồng."
   },
-  ending_bad: {
-    chapter: "KẾT CỤC: NGỌN LỬA CHẾT YỂU",
+
+  ending_leloi_northern_conquest: {
+    chapter: "KẾT CỤC 2A: BÁ NGHIỆP TRÊN XƯƠNG MÁU",
+    speaker: "Lê Lợi",
+    avatar: "🤴",
+    emotion: "heroic",
+    ending: {
+      title: "💥 BẮC TIẾN THÀNH CÔNG",
+      type: "victory",
+      desc: "Đông Quan thất thủ. Lê Lợi nắm trọn quyền hành. Nhưng bóng ma của trận Bồ Ải luôn ám ảnh, khiến ông trở thành một vị vua đa nghi và cô độc."
+    },
+    text: "Ta ngồi trên ngai vàng cao ngất, nhưng xung quanh chỉ toàn là những bóng ma khóc than."
+  },
+
+  ending_leloi_great_announcement: {
+    chapter: "KẾT CỤC 2B: BÌNH NGÔ ĐẠI CÁO",
+    speaker: "Nguyễn Trãi",
+    avatar: "📜",
+    emotion: "heroic",
+    ending: {
+      title: "📜 LỜI CÁO THIÊN THU",
+      type: "historical",
+      desc: "Bình Ngô Đại Cáo ra đời không chỉ là bản tuyên ngôn độc lập, mà còn là lời tự vấn lương tâm của Lê Lợi về cái giá của chiến tranh."
+    },
+    text: "Việc nhân nghĩa cốt ở yên dân... Nhưng hỡi ôi, ta đã phải đánh đổi quá nhiều để có chữ 'yên' này."
+  },
+
+  ending_leloi_sovereignty_peace: {
+    chapter: "KẾT CỤC 2C: QUYỀN LỰC TUYỆT ĐỐI",
+    speaker: "Lê Lợi",
+    avatar: "🤴",
+    emotion: "heroic",
+    ending: {
+      title: "🏆 DỤ HÀNG THÀNH CÔNG",
+      type: "victory",
+      desc: "Thành Nghệ An mở cửa. Kẻ chống đối bị tiêu diệt. Lê Lợi thiết lập nền hòa bình dựa trên sự quy phục tuyệt đối, mở ra một thời kỳ trị vì hà khắc."
+    },
+    text: "Hòa bình không thể được xây dựng bằng sự yếu đuối. Chỉ có sức mạnh tuyệt đối mới dập tắt mọi mầm loạn."
+  },
+
+  ending_leloi_golden_era: {
+    chapter: "KẾT CỤC 2D: KỶ NGUYÊN VÀNG SON",
     speaker: "Dòng Lịch Sử",
     avatar: "📜",
-    emotion: "fearful",
-    sfx: "thunder",
-    text: "Sự bốc đồng và cứng nhắc đã phá hủy hoàn toàn lực lượng khởi nghĩa tại núi Chí Linh. Bạn và Lê Lợi tử trận trong vòng vây của hàng vạn quân Minh.",
+    emotion: "solemn",
     ending: {
-      type: "bad",
-      title: "BAD ENDING: NGỌN LỬA CHẾT YỂU",
-      desc: "Không có truyền thuyết nào được sinh ra. Khởi nghĩa Lam Sơn kết thúc bi thảm. Đất nước tiếp tục đắm chìm trong sự đô hộ tàn bạo của giặc Minh."
-    }
+      title: "👑 KỶ NGUYÊN HẬU LÊ",
+      type: "historical",
+      desc: "Lê Lợi dùng nhân đức cảm hóa muôn người. Đại Việt bước vào kỷ nguyên phát triển rực rỡ nhất, nơi sự khoan dung trị vì thay cho gươm đao."
+    },
+    text: "Lấy nhân nghĩa thắng hung tàn. Đó mới là sức mạnh vĩ đại nhất của người Đại Việt."
   }
 };

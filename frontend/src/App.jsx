@@ -10,16 +10,8 @@ function App() {
   const [vortexChar, setVortexChar] = useState(null);
   const [initialPrompt, setInitialPrompt] = useState(null);
 
-  // Global Eco Mode state
-  const [ecoMode, setEcoMode] = useState(false);
-
   const handleCharacterSelect = (char) => {
     if (isVortexing) return;
-
-    if (ecoMode) {
-      setCharacter(char);
-      return;
-    }
 
     setVortexChar(char);
     setIsVortexing(true);
@@ -48,11 +40,11 @@ function App() {
               <h2 className="split-title-vertical">BÀ TRIỆU</h2>
               <div className="split-details">
                 <h2 className="split-name">BÀ TRIỆU</h2>
-                <h3 className="split-title" style={{ color: '#fef08a' }}>Nhụy Kiều Tướng Quân (Ấn để Chọn)</h3>
-                <p className="split-desc" style={{ fontSize: '1.1rem', color: '#fff', textShadow: '1px 1px 4px #000' }}>
-                  Nữ anh hùng dân tộc thế kỷ 3 cưỡi voi trắng đánh tan giặc Đông Ngô giữ gìn giang sơn đất nước.
+                <h3 className="split-title">Nhụy Kiều Tướng Quân</h3>
+                <p className="split-desc">
+                  Khởi nghĩa Nưa đại phá quân Đông Ngô.
                 </p>
-                <button className="btn-primary split-btn" style={{ fontSize: '1.2rem', padding: '12px 30px' }}>BẮT ĐẦU VỚI BÀ TRIỆU</button>
+                <button className="btn-primary split-btn">BẮT ĐẦU</button>
               </div>
             </div>
           </div>
@@ -65,17 +57,17 @@ function App() {
               <h2 className="split-title-vertical">LÊ LỢI</h2>
               <div className="split-details">
                 <h2 className="split-name">LÊ LỢI</h2>
-                <h3 className="split-title" style={{ color: '#fef08a' }}>Bình Định Vương (Ấn để Chọn)</h3>
-                <p className="split-desc" style={{ fontSize: '1.1rem', color: '#fff', textShadow: '1px 1px 4px #000' }}>
-                  Đức vua Lê Thái Tổ lãnh đạo cuộc khởi nghĩa Lam Sơn đại phá giặc Minh giành lại hòa bình thái bình.
+                <h3 className="split-title">Bình Định Vương</h3>
+                <p className="split-desc">
+                  Khởi nghĩa Lam Sơn đại phá quân Minh.
                 </p>
-                <button className="btn-primary split-btn" style={{ fontSize: '1.2rem', padding: '12px 30px' }}>BẮT ĐẦU VỚI LÊ LỢI</button>
+                <button className="btn-primary split-btn">BẮT ĐẦU</button>
               </div>
             </div>
           </div>
 
           <div className="split-center-title">
-            <h1 style={{ fontSize: '2.5rem' }}>CHỌN NHÂN VẬT LỊCH SỬ</h1>
+            <h1>CHỌN NHÂN VẬT LỊCH SỬ</h1>
           </div>
         </div>
       ) : (
@@ -87,48 +79,59 @@ function App() {
             /* Mode Selection Menu - Two Core Features */
             <div className="menu-container">
               <button
-                className="btn-primary"
-                style={{ position: 'absolute', top: 20, left: 20, zIndex: 10, fontSize: '1.1rem', padding: '10px 20px' }}
+                className="btn-back-nav"
                 onClick={() => {
                   setCharacter(null);
                   setInitialPrompt(null);
                 }}
               >
-                ← Chọn lại Nhân Vật
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Đổi Nhân Vật</span>
               </button>
 
-              <div className="menu-content" style={{ maxWidth: '900px', width: '95%' }}>
-                <h1 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '10px', fontSize: '2.8rem' }}>
-                  {character === 'batrieu' ? 'TRUYỀN THUYẾT BÀ TRIỆU' : 'HÀO KHÍ LAM SƠN'}
-                </h1>
-                <p className="subtitle" style={{ textAlign: 'center', marginBottom: '45px', fontSize: '1.2rem', color: 'rgba(255,255,255,0.85)' }}>
-                  Chọn một cách chơi đơn giản bên dưới:
-                </p>
+              <div className="menu-content">
+                <div className="menu-header">
+                  <span className="menu-badge">HÀNH TRÌNH LỊCH SỬ</span>
+                  <h1 className="title text-gradient">
+                    {character === 'batrieu' ? 'TRUYỀN THUYẾT BÀ TRIỆU' : 'HÀO KHÍ LAM SƠN'}
+                  </h1>
+                  <p className="menu-subtitle">
+                    Lựa chọn phương thức trải nghiệm để bắt đầu đàm đạo cùng anh hùng dân tộc
+                  </p>
+                </div>
 
-                {/* Two Core Feature Cards */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
+                {/* Two Core Feature Cards Grid */}
+                <div className="menu-cards-grid">
                   
                   {/* Core Feature 1: Free Chat Dialogue */}
-                  <div className="menu-card glass-panel" onClick={() => setMode('chat')} style={{ padding: '50px 30px', border: '2px solid rgba(250,204,21,0.5)', cursor: 'pointer' }}>
-                    <div className="card-icon" style={{ fontSize: '4.5rem' }}>🗣️</div>
-                    <h2 style={{ fontSize: '1.8rem', marginTop: '15px' }}>Nói chuyện & Hỏi đáp</h2>
-                    <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.9)', lineHeight: '1.5' }}>
-                      Trò chuyện trực tiếp cùng {character === 'batrieu' ? 'Bà Triệu' : 'Lê Lợi'}. Dễ dàng đặt câu hỏi bằng bàn phím.
-                    </p>
-                    <button className="btn-primary" style={{ marginTop: '20px', fontSize: '1.2rem', padding: '12px 30px', width: '100%' }}>
-                      💬 Bắt Đầu Nói Chuyện
+                  <div className="menu-card glass-panel" onClick={() => setMode('chat')}>
+                    <div className="menu-card-content">
+                      <span className="mode-pill">CHẾ ĐỘ 1 • AI DIALOGUE</span>
+                      <div className="card-icon-wrapper">🗣️</div>
+                      <h2 className="mode-card-title">Đàm Đạo Tự Do</h2>
+                      <p className="mode-card-desc">
+                        Trò chuyện trực tiếp cùng {character === 'batrieu' ? 'Bà Triệu' : 'Lê Lợi'}, đàm đạo và giải đáp lịch sử thời gian thực.
+                      </p>
+                    </div>
+                    <button className="btn-mode-action">
+                      <span>Bắt Đầu Đàm Đạo</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
                   </div>
 
                   {/* Core Feature 2: Visual Novel Story */}
-                  <div className="menu-card glass-panel" onClick={() => setMode('vn')} style={{ padding: '50px 30px', border: '2px solid rgba(250,204,21,0.5)', cursor: 'pointer' }}>
-                    <div className="card-icon" style={{ fontSize: '4.5rem' }}>📖</div>
-                    <h2 style={{ fontSize: '1.8rem', marginTop: '15px' }}>Xem Truyện Nhập Vai</h2>
-                    <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.9)', lineHeight: '1.5' }}>
-                      Xem diễn biến câu chuyện lịch sử hào hùng và bấm chọn các quyết định đơn giản trên màn hình.
-                    </p>
-                    <button className="btn-primary" style={{ marginTop: '20px', fontSize: '1.2rem', padding: '12px 30px', width: '100%' }}>
-                      📚 Bắt Đầu Xem Truyện
+                  <div className="menu-card glass-panel" onClick={() => setMode('vn')}>
+                    <div className="menu-card-content">
+                      <span className="mode-pill">CHẾ ĐỘ 2 • VISUAL NOVEL</span>
+                      <div className="card-icon-wrapper">📖</div>
+                      <h2 className="mode-card-title">Cốt Truyện Nhập Vai</h2>
+                      <p className="mode-card-desc">
+                        Tái hiện diễn biến lịch sử hào hùng qua các mốc quyết định trọng đại mang tính sinh tử.
+                      </p>
+                    </div>
+                    <button className="btn-mode-action">
+                      <span>Khám Phá Cốt Truyện</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
                   </div>
 
@@ -136,9 +139,9 @@ function App() {
               </div>
             </div>
           ) : mode === 'chat' ? (
-            <FreeChatMode character={character} lang="vi" initialPrompt={initialPrompt} ecoMode={ecoMode} setEcoMode={setEcoMode} onBack={() => { setMode(null); setInitialPrompt(null); }} />
+            <FreeChatMode character={character} lang="vi" initialPrompt={initialPrompt} onBack={() => { setMode(null); setInitialPrompt(null); }} />
           ) : (
-            <VisualNovelMode character={character} lang="vi" ecoMode={ecoMode} setEcoMode={setEcoMode} onBack={() => setMode(null)} />
+            <VisualNovelMode character={character} lang="vi" onBack={() => setMode(null)} />
           )}
         </div>
       )}

@@ -3,7 +3,7 @@ import { useWebSocket } from "../hooks/useWebSocket";
 import ParticleAvatar from "./ParticleAvatar";
 import MapPanel from "./MapPanel";
 
-export default function FreeChatMode({ character, lang = 'vi', initialPrompt = null, ecoMode = false, setEcoMode, onBack }) {
+export default function FreeChatMode({ character, lang = 'vi', initialPrompt = null, onBack }) {
   const [inputText, setInputText] = useState("");
   const [showMap, setShowMap] = useState(false);
   const [inventory, setInventory] = useState([]);
@@ -35,7 +35,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
     ],
     leloi: [
       { id: 'll_guom', name: 'Gươm Thuận Thiên', img: '/ll_guom.jpg', desc: 'Thanh gươm thần khắc chữ Thuận Thiên phát ra hào quang do Đức Long Quân ban cứu nước.', keywords: ['thuận thiên', 'gươm', 'rùa'] },
-      { id: 'll_aobao', name: 'Áo Bào Lê Lai', img: '/ll_aobao.jpg', desc: 'Áo bào hoàng gia tướng Lê Lai mặc giả làm vua hi sinh thân mình cứu chúa tại Chí Linh.', keywords: ['lê lai', 'áo bào'] },
+      { id: 'll_aobao', name: 'Áo Bào Lê Lai', img: '/ll_aobao.jpg', desc: 'Áo bào hoàng gia tướng Lê Lai mặc giả làm vua hy sinh thân mình cứu chúa tại Chí Linh.', keywords: ['lê lai', 'áo bào'] },
       { id: 'll_lungnhai', name: 'Huyết Thư Lũng Nhai', img: '/ll_lungnhai.jpg', desc: 'Bản thề minh ước kết nghĩa anh em đồng lòng khởi nghĩa tại ngàn Lũng Nhai năm 1416.', keywords: ['lũng nhai', 'kết nghĩa'] },
     ]
   };
@@ -346,19 +346,6 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
             Đàm Đạo Cùng {name}
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            
-            {/* Eco Mode Switch */}
-            <button 
-              className="btn-primary"
-              onClick={() => setEcoMode(!ecoMode)}
-              style={{
-                background: ecoMode ? 'linear-gradient(90deg, #15803d, #166534)' : 'rgba(0,0,0,0.5)',
-                borderColor: ecoMode ? '#4ade80' : 'rgba(255,255,255,0.2)'
-              }}
-              title="Bật/Tắt chế độ tiết kiệm hiệu năng pin"
-            >
-              🔋 Eco Mode: {ecoMode ? 'BẬT' : 'TẮT'}
-            </button>
 
             {/* RAG Toggle */}
             <button 
@@ -368,9 +355,9 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
                 background: ragEnabled ? 'linear-gradient(90deg, #16a34a, #15803d)' : 'linear-gradient(90deg, #4b5563, #374151)',
                 borderColor: ragEnabled ? '#4ade80' : '#6b7280'
               }}
-              title="Bật/Tắt RAG Kiểm Kiểm Chứng Sử Liệu Vector DB"
+              title="Bật/Tắt RAG Kiểm Chứng Sử Liệu Vector DB"
             >
-              🔍 RAG: {ragEnabled ? 'BẬT' : 'TẤT'}
+              🔍 RAG: {ragEnabled ? 'BẬT' : 'TẮT'}
             </button>
 
             <button className="btn-primary" onClick={() => setShowInventory(true)}>
@@ -459,7 +446,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
             return (
               <div key={idx} className={`message-container ${msg.sender} slide-up`}>
                 {msg.sender === "bot" && (
-                  <ParticleAvatar character={character} ecoMode={ecoMode} />
+                  <ParticleAvatar character={character} />
                 )}
                 <div className={`message-bubble ${msg.sender === "user" ? "user-bubble" : ""}`}>
                   <div>{msg.text}</div>
@@ -487,7 +474,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
 
           {isReceiving && (
             <div className="message-container bot slide-up">
-              <ParticleAvatar character={character} ecoMode={ecoMode} />
+              <ParticleAvatar character={character} />
               <div className="message-bubble">
                 <span className="typing-dot">.</span>
                 <span className="typing-dot">.</span>
