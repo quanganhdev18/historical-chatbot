@@ -3,7 +3,7 @@ import { useWebSocket } from "../hooks/useWebSocket";
 import ParticleAvatar from "./ParticleAvatar";
 import MapPanel from "./MapPanel";
 
-export default function FreeChatMode({ character, lang = 'vi', initialPrompt = null, onBack }) {
+export default function FreeChatMode({ character, lang = 'vi', onBack }) {
   const [inputText, setInputText] = useState("");
   const [showMap, setShowMap] = useState(false);
   const [inventory, setInventory] = useState([]);
@@ -21,7 +21,9 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
   const [streamSpeed, setStreamSpeed] = useState(0);
   const [emotions, setEmotions] = useState({ pride: 65, resolve: 75, solemn: 25 });
 
-  const WS_URL = `ws://localhost:8000/ws/chat/${character}?lang=vi`;
+  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const wsHost = window.location.hostname === 'localhost' ? 'localhost:8000' : window.location.host;
+  const WS_URL = `${wsProtocol}//${wsHost}/ws/chat/${character}?lang=vi`;
   const { isConnected, messages, sendMessage, isReceiving } = useWebSocket(WS_URL);
 
   const historyRef = useRef(null);
@@ -100,12 +102,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
     }
   }, [messages, isReceiving, character, inventory]);
 
-  // Send initial prompt if provided
-  useEffect(() => {
-    if (initialPrompt && isConnected && !isReceiving) {
-      sendMessage(initialPrompt, { rag_enabled: ragEnabled });
-    }
-  }, [initialPrompt, isConnected]);
+
 
   // Auto-scroll
   useEffect(() => {
@@ -137,7 +134,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
   const currentItems = ITEMS[character] || [];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', height: '100vh', width: '100vw', overflow: 'hidden', background: '#09070f' }}>
+    <div className="chat-layout" style={{ height: '100vh', width: '100vw', overflow: 'hidden', background: '#09070f' }}>
       
       {/* 3D Holographic Artifact Card Inspector Modal */}
       {inspectingItem && (
@@ -151,12 +148,12 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
             style={{ 
               background: 'linear-gradient(135deg, rgba(30, 20, 10, 0.95) 0%, rgba(15, 10, 22, 0.95) 100%)', 
               color: 'white',
-              border: '2px solid #facc15', 
+              border: '2px solid #d4af37', 
               borderRadius: '24px', 
               padding: '30px', 
               maxWidth: '380px', 
               width: '100%', 
-              boxShadow: '0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(250,204,21,0.3)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(212,175,55,0.3)',
               position: 'relative',
               textAlign: 'center',
               transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.05)`,
@@ -184,7 +181,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
             </button>
 
             {/* AI Generated Artifact Image in the center of Hologram */}
-            <div style={{ position: 'relative', width: '100%', height: '220px', borderRadius: '14px', overflow: 'hidden', marginBottom: '20px', border: '2px solid rgba(250,204,21,0.5)', background: '#000' }}>
+            <div style={{ position: 'relative', width: '100%', height: '220px', borderRadius: '14px', overflow: 'hidden', marginBottom: '20px', border: '2px solid rgba(212,175,55,0.5)', background: '#000' }}>
               <img 
                 src={inspectingItem.img} 
                 alt={inspectingItem.name} 
@@ -192,7 +189,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
               />
             </div>
 
-            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#facc15' }}>✨ BẢO VẬT HOÀNG GIA</span>
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '2px', color: '#d4af37' }}>✨ BẢO VẬT HOÀNG GIA</span>
             <h2 style={{ fontFamily: "'Playfair Display', serif", color: '#fff', fontSize: '1.6rem', margin: '5px 0' }}>
               {inspectingItem.name}
             </h2>
@@ -206,16 +203,17 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
 
       {/* LEFT SIDEBAR: Telemetry Analyzer */}
       <aside 
+        className="telemetry-sidebar"
         style={{ 
           background: 'rgba(15, 10, 22, 0.95)', 
-          borderRight: '2px solid rgba(250,204,21,0.25)', 
+          borderRight: '2px solid rgba(212,175,55,0.25)', 
           display: 'flex', 
           flexDirection: 'column', 
           padding: '15px', 
           overflowY: 'auto' 
         }}
       >
-        <h3 style={{ fontFamily: "'Playfair Display', serif", color: '#facc15', fontSize: '1.05rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', margin: '0 0 15px 0', letterSpacing: '1px' }}>
+        <h3 style={{ fontFamily: "'Playfair Display', serif", color: '#d4af37', fontSize: '1.05rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px', margin: '0 0 15px 0', letterSpacing: '1px' }}>
           🛰️ THIẾT BỊ PHÂN TÍCH AI
         </h3>
 
@@ -226,7 +224,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
             <span>🌡️ Temp: <strong>0.35</strong></span>
           </div>
 
-          <span style={{ fontSize: '0.75rem', color: '#fef08a', fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
+          <span style={{ fontSize: '0.75rem', color: '#e8d48b', fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
             🎭 Sắc Thái Câu Thoại (Sentiment):
           </span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -260,7 +258,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
           </div>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: 'auto', padding: '10px', background: 'rgba(250,204,21,0.05)', borderRadius: '8px', border: '1px solid rgba(250,204,21,0.2)' }}>
+        <div style={{ textAlign: 'center', marginTop: 'auto', padding: '10px', background: 'rgba(212,175,55,0.05)', borderRadius: '8px', border: '1px solid rgba(212,175,55,0.2)' }}>
           <p style={{ margin: 0, fontSize: '0.75rem', color: '#e2e8f0', lineHeight: '1.4' }}>
             💡 <em>Mô hình AI tự phân tích sắc thái biểu đạt câu từ trong thời gian thực.</em>
           </p>
@@ -272,7 +270,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
         
         {/* Toast Notification for Unlocked Items */}
         {unlockedItem && (
-          <div style={{ position: 'absolute', top: 80, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(90deg, #d97706, #92400e)', color: 'white', padding: '14px 28px', borderRadius: '30px', zIndex: 1000, boxShadow: '0 10px 25px rgba(0,0,0,0.6)', border: '2px solid #fde68a' }} className="slide-up">
+          <div style={{ position: 'absolute', top: 80, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(90deg, #b8941f, #8b5e3c)', color: 'white', padding: '14px 28px', borderRadius: '30px', zIndex: 1000, boxShadow: '0 10px 25px rgba(0,0,0,0.6)', border: '2px solid #c5a055' }} className="slide-up">
             <h3 style={{ margin: 0, fontFamily: "'Playfair Display', serif" }}>✨ Đã Thu Thập: {unlockedItem.name}</h3>
             <p style={{ margin: 0, fontSize: '0.85rem' }}>{unlockedItem.desc}</p>
           </div>
@@ -281,9 +279,9 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
         {/* Inventory Modal with Artifact Images as center design */}
         {showInventory && (
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)', zIndex: 2000, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div className="glass-panel slide-up" style={{ border: '2px solid #facc15', borderRadius: '24px', padding: '40px', width: '90%', maxWidth: '750px', color: 'white', position: 'relative' }}>
+            <div className="glass-panel slide-up" style={{ border: '2px solid #d4af37', borderRadius: '24px', padding: '40px', width: '90%', maxWidth: '750px', color: 'white', position: 'relative' }}>
               <button onClick={() => setShowInventory(false)} style={{ position: 'absolute', top: 20, right: 20, background: 'transparent', border: 'none', color: 'white', fontSize: '1.6rem', cursor: 'pointer', zIndex: 10 }}>✕</button>
-              <h2 style={{ fontFamily: "'Playfair Display', serif", textAlign: 'center', marginBottom: '25px', color: '#fef08a', fontSize: '1.8rem' }}>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", textAlign: 'center', marginBottom: '25px', color: '#e8d48b', fontSize: '1.8rem' }}>
                 🎒 Hành Trang Hiện Vật Lịch Sử
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
@@ -294,21 +292,21 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
                       key={item.id} 
                       onClick={() => isUnlocked && setInspectingItem(item)}
                       style={{ 
-                        background: isUnlocked ? 'rgba(250,204,21,0.1)' : 'rgba(0,0,0,0.5)', 
-                        border: `2px solid ${isUnlocked ? '#facc15' : '#444'}`, 
+                        background: isUnlocked ? 'rgba(212,175,55,0.1)' : 'rgba(0,0,0,0.5)', 
+                        border: `2px solid ${isUnlocked ? '#d4af37' : '#444'}`, 
                         padding: '12px', 
                         borderRadius: '16px', 
                         textAlign: 'center', 
                         opacity: isUnlocked ? 1 : 0.65,
                         cursor: isUnlocked ? 'pointer' : 'default',
                         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                        boxShadow: isUnlocked ? '0 8px 20px rgba(250,204,21,0.15)' : 'none'
+                        boxShadow: isUnlocked ? '0 8px 20px rgba(212,175,55,0.15)' : 'none'
                       }}
                       onMouseEnter={(e) => isUnlocked && (e.currentTarget.style.transform = 'scale(1.05)')}
                       onMouseLeave={(e) => isUnlocked && (e.currentTarget.style.transform = 'none')}
                     >
                       {/* Stylized Image Box */}
-                      <div style={{ position: 'relative', width: '100%', height: '120px', borderRadius: '10px', overflow: 'hidden', marginBottom: '10px', background: '#000', border: isUnlocked ? '1px solid rgba(250,204,21,0.3)' : '1px solid #333' }}>
+                      <div style={{ position: 'relative', width: '100%', height: '120px', borderRadius: '10px', overflow: 'hidden', marginBottom: '10px', background: '#000', border: isUnlocked ? '1px solid rgba(212,175,55,0.3)' : '1px solid #333' }}>
                         <img 
                           src={item.img} 
                           alt={item.name} 
@@ -328,7 +326,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
                         )}
                       </div>
 
-                      <h3 style={{ margin: 0, fontFamily: "'Playfair Display', serif", color: isUnlocked ? '#fef08a' : '#aaa', fontSize: '1.05rem' }}>{item.name}</h3>
+                      <h3 style={{ margin: 0, fontFamily: "'Playfair Display', serif", color: isUnlocked ? '#e8d48b' : '#aaa', fontSize: '1.05rem' }}>{item.name}</h3>
                       <p style={{ fontSize: '0.75rem', marginTop: '6px', color: isUnlocked ? '#4ade80' : '#888', margin: '4px 0 0 0' }}>
                         {isUnlocked ? '🔎 Xem Thẻ 3D Hologram' : 'Trò chuyện để mở khóa'}
                       </p>
@@ -345,11 +343,11 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
           <div className="chat-title">
             Đàm Đạo Cùng {name}
           </div>
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <div className="chat-header-actions" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
 
             {/* RAG Toggle */}
             <button 
-              className="btn-primary" 
+              className="btn-primary btn-responsive" 
               onClick={() => setRagEnabled(!ragEnabled)}
               style={{ 
                 background: ragEnabled ? 'linear-gradient(90deg, #16a34a, #15803d)' : 'linear-gradient(90deg, #4b5563, #374151)',
@@ -357,27 +355,27 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
               }}
               title="Bật/Tắt RAG Kiểm Chứng Sử Liệu Vector DB"
             >
-              🔍 RAG: {ragEnabled ? 'BẬT' : 'TẮT'}
+              <span className="btn-icon">🔍</span> <span className="btn-text">RAG: {ragEnabled ? 'BẬT' : 'TẮT'}</span>
             </button>
 
-            <button className="btn-primary" onClick={() => setShowInventory(true)}>
-              🎒 Hành Trang ({inventory.length}/{currentItems.length})
+            <button className="btn-primary btn-responsive" onClick={() => setShowInventory(true)}>
+              <span className="btn-icon">🎒</span> <span className="btn-text">Hành Trang ({inventory.length}/{currentItems.length})</span>
             </button>
             <button 
-              className="btn-primary" 
+              className="btn-primary btn-responsive" 
               onClick={() => setShowMap(!showMap)}
-              style={{ background: showMap ? 'rgba(250, 204, 21, 0.3)' : '' }}
+              style={{ background: showMap ? 'rgba(212, 175, 55, 0.3)' : '' }}
             >
-              🗺️ {showMap ? 'Ẩn Bản Đồ' : 'Bản Đồ Di Tích'}
+              <span className="btn-icon">🗺️</span> <span className="btn-text">{showMap ? 'Ẩn Bản Đồ' : 'Bản Đồ Di Tích'}</span>
             </button>
-            <button className="btn-primary" onClick={onBack}>
-              Trở Về
+            <button className="btn-primary btn-responsive" onClick={onBack}>
+              <span className="btn-icon">🔙</span> <span className="btn-text">Trở Về</span>
             </button>
           </div>
         </header>
 
         {/* RAG Status Banner */}
-        <div style={{ background: 'rgba(20,15,10,0.85)', padding: '10px 20px', borderBottom: '1px solid rgba(250,204,21,0.2)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+        <div className="rag-status-banner" style={{ background: 'rgba(20,15,10,0.85)', padding: '10px 20px', borderBottom: '1px solid rgba(212,175,55,0.2)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
           <span style={{ fontSize: '0.8rem', color: ragEnabled ? '#4ade80' : '#9ca3af' }}>
             🛡️ RAG Status: {ragEnabled ? 'Đã liên kết Vector DB (Chống bịa sử)' : 'Chế độ AI tự do (Chưa kiểm chứng)'}
           </span>
@@ -388,6 +386,8 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
           <div style={{ padding: '15px 20px', background: 'rgba(0,0,0,0.6)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
             <MapPanel 
               character={character} 
+              isConnected={isConnected}
+              isReceiving={isReceiving}
               onSelectLocationPrompt={(prompt) => {
                 sendMessage(prompt, { rag_enabled: ragEnabled });
                 setShowMap(false);
@@ -398,7 +398,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
 
         {/* Mini Timeline Bar */}
         <div style={{ background: 'rgba(0,0,0,0.5)', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '10px 20px', display: 'flex', gap: '12px', overflowX: 'auto', whiteSpace: 'nowrap', alignItems: 'center' }}>
-          <span style={{ color: '#facc15', fontFamily: "'Playfair Display', serif", fontWeight: 'bold', fontSize: '0.9rem', marginRight: '10px' }}>
+          <span className="timeline-title" style={{ color: '#d4af37', fontFamily: "'Playfair Display', serif", fontWeight: 'bold', fontSize: '0.9rem', marginRight: '10px' }}>
             Dòng Thời Gian:
           </span>
           {(character === 'batrieu' 
@@ -408,11 +408,11 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
             <button 
               key={idx}
               className="btn-primary"
-              style={{ padding: '5px 12px', fontSize: '0.8rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '15px' }}
+              style={{ padding: '5px 12px', fontSize: '0.8rem', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '15px' }}
               onClick={() => sendMessage(`Hãy kể về sự kiện: ${item.year} - ${item.event}`, { rag_enabled: ragEnabled })}
               disabled={!isConnected || isReceiving}
             >
-              <strong style={{ color: '#fef08a' }}>{item.year}</strong>: {item.event}
+              <strong style={{ color: '#e8d48b' }}>{item.year}</strong>: {item.event}
             </button>
           ))}
         </div>
@@ -432,8 +432,9 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
                   <button 
                     key={i} 
                     className="btn-primary" 
-                    style={{ fontSize: '0.9rem', padding: '8px 16px', background: 'transparent' }}
+                    style={{ fontSize: '0.9rem', padding: '8px 16px' }}
                     onClick={() => sendMessage(promptText, { rag_enabled: ragEnabled })}
+                    disabled={!isConnected || isReceiving}
                   >
                     {promptText}
                   </button>
@@ -454,7 +455,7 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
                   {/* RAG Verification Citations Box */}
                   {msg.sender === "bot" && msg.sources && msg.sources.length > 0 && (
                     <div style={{ marginTop: '12px', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.15)', fontSize: '0.8rem', color: '#93c5fd' }}>
-                      <div style={{ fontWeight: 'bold', color: '#facc15', marginBottom: '4px' }}>
+                      <div style={{ fontWeight: 'bold', color: '#d4af37', marginBottom: '4px' }}>
                         📖 Sử liệu kiểm chứng (RAG Source):
                       </div>
                       {msg.sources.map((src, i) => (
@@ -506,8 +507,8 @@ export default function FreeChatMode({ character, lang = 'vi', initialPrompt = n
         </div>
 
         {!isConnected && (
-          <div style={{ position: "fixed", top: 10, left: 10, background: "rgba(255,0,0,0.8)", padding: "5px 15px", borderRadius: "20px", fontSize: "0.8rem", color: "white" }}>
-            Đang kết nối WebSocket...
+          <div style={{ position: "fixed", top: 20, left: '50%', transform: 'translateX(-50%)', background: "rgba(185, 28, 28, 0.9)", padding: "10px 25px", borderRadius: "30px", fontSize: "0.95rem", color: "white", zIndex: 9999, border: '1px solid #fca5a5', boxShadow: '0 4px 15px rgba(0,0,0,0.5)', fontFamily: "'Inter', sans-serif", display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span className="vn-typing-indicator" style={{ color: 'white', animation: 'none' }}>⚠️</span> Đang kết nối lại...
           </div>
         )}
       </div>

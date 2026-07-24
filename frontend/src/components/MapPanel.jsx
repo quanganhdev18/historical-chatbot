@@ -124,7 +124,7 @@ const MAP_LOCATIONS = {
   ]
 };
 
-export default function MapPanel({ character, onSelectLocationPrompt }) {
+export default function MapPanel({ character, isConnected, isReceiving, onSelectLocationPrompt }) {
   const locations = MAP_LOCATIONS[character] || MAP_LOCATIONS['batrieu'];
   const [selectedLoc, setSelectedLoc] = useState(locations[0]);
   const [sliderVal, setSliderVal] = useState(50); // Before/After slider position
@@ -163,17 +163,17 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
         width: '100%', 
         borderRadius: '20px', 
         overflow: 'hidden', 
-        border: '2px solid rgba(250,204,21,0.4)', 
+        border: '2px solid rgba(212,175,55,0.4)', 
         backgroundColor: 'rgba(15,10,25,0.92)', 
         boxShadow: '0 12px 30px rgba(0,0,0,0.6)'
       }}
     >
       
       {/* LEFT COLUMN: Highly Interactive SVG Map */}
-      <div style={{ position: 'relative', borderRight: '1px solid rgba(250,204,21,0.2)', backgroundColor: 'rgba(5,5,10,0.5)', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', borderRight: '1px solid rgba(212,175,55,0.2)', backgroundColor: 'rgba(5,5,10,0.5)', overflow: 'hidden' }}>
         
         {/* Map Header Overlay */}
-        <div style={{ position: 'absolute', top: 12, left: 15, zIndex: 10, background: 'rgba(0,0,0,0.7)', padding: '4px 12px', borderRadius: '20px', border: '1px solid rgba(250,204,21,0.3)', fontSize: '0.8rem', color: '#facc15', fontWeight: 'bold', letterSpacing: '1px' }}>
+        <div style={{ position: 'absolute', top: 12, left: 15, zIndex: 10, background: 'rgba(0,0,0,0.7)', padding: '4px 12px', borderRadius: '20px', border: '1px solid rgba(212,175,55,0.3)', fontSize: '0.8rem', color: '#d4af37', fontWeight: 'bold', letterSpacing: '1px' }}>
           🗺️ BẢN ĐỒ DI TÍCH LỊCH SỬ TƯƠNG TÁC
         </div>
 
@@ -198,7 +198,7 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
                 y1={prev.y}
                 x2={loc.x}
                 y2={loc.y}
-                stroke="rgba(250, 204, 21, 0.35)"
+                stroke="rgba(212, 175, 55, 0.35)"
                 strokeWidth="2"
                 strokeDasharray="4,4"
               />
@@ -218,7 +218,7 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
                 {/* Outer Pulsing Halo */}
                 <circle 
                   r={isSelected ? "15" : "11"} 
-                  fill={isSelected ? "#eab308" : "#d97706"} 
+                  fill={isSelected ? "#eab308" : "#b8941f"} 
                   opacity={isSelected ? "0.35" : "0.2"} 
                   className="pulse-circle" 
                 />
@@ -226,7 +226,7 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
                 {/* Core Node Circle */}
                 <circle 
                   r="7" 
-                  fill={isSelected ? "#fef08a" : "#facc15"} 
+                  fill={isSelected ? "#e8d48b" : "#d4af37"} 
                   stroke={isSelected ? "#eab308" : "#fff"} 
                   strokeWidth="2" 
                 />
@@ -235,7 +235,7 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
                 <text
                   y="-12"
                   textAnchor="middle"
-                  fill={isSelected ? "#fef08a" : "#ffffff"}
+                  fill={isSelected ? "#e8d48b" : "#ffffff"}
                   fontSize="8.5"
                   fontWeight="bold"
                   style={{ 
@@ -266,7 +266,7 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
           <div className="slide-up" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             
             {/* Ancient Name Header */}
-            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#facc15', marginBottom: '2px' }}>
+            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#d4af37', marginBottom: '2px' }}>
               📍 Địa Danh Lịch Sử
             </span>
             <h3 style={{ fontFamily: "'Playfair Display', serif", color: '#fff', fontSize: '1.25rem', margin: '0 0 2px 0' }}>
@@ -281,14 +281,14 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
             {/* 🖼️ Gương Thần Thời Không - Hardware Accelerated Pure CSS clip-path Slider */}
             <div 
               ref={sliderRef}
-              style={{ position: 'relative', width: '100%', height: '100px', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(250,204,21,0.35)', marginBottom: '10px', userSelect: 'none' }}
+              style={{ position: 'relative', width: '100%', height: '100px', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(212,175,55,0.35)', marginBottom: '10px', userSelect: 'none' }}
             >
               
               {/* Underlay: Ancient Historical View */}
               <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                   <img src={selectedLoc.ancientImg} alt={selectedLoc.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', bottom: 4, right: 8, background: 'rgba(0,0,0,0.65)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.6rem', color: '#fef08a', zIndex: 3 }}>
+                  <div style={{ position: 'absolute', bottom: 4, right: 8, background: 'rgba(0,0,0,0.65)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.6rem', color: '#e8d48b', zIndex: 3 }}>
                     🚩 {selectedLoc.ancientLabel}
                   </div>
                 </div>
@@ -319,10 +319,10 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
                   bottom: 0,
                   left: `${sliderVal}%`,
                   width: '2px',
-                  background: '#facc15',
+                  background: '#d4af37',
                   zIndex: 2,
                   pointerEvents: 'none',
-                  boxShadow: '0 0 8px rgba(250,204,21,0.8)'
+                  boxShadow: '0 0 8px rgba(212,175,55,0.8)'
                 }}
               />
 
@@ -360,13 +360,14 @@ export default function MapPanel({ character, onSelectLocationPrompt }) {
                 fontSize: '0.85rem', 
                 padding: '8px 14px', 
                 width: '100%', 
-                background: 'linear-gradient(90deg, #d97706, #b45309)',
+                background: 'linear-gradient(90deg, #b8941f, #b45309)',
                 fontWeight: 'bold'
               }}
               onClick={() => {
                 const promptText = `Hãy kể cho ta nghe về lịch sử gắn liền với địa danh: ${selectedLoc.name} (${selectedLoc.address})`;
                 onSelectLocationPrompt(promptText);
               }}
+              disabled={!isConnected || isReceiving}
             >
               💬 Hỏi AI Về Địa Danh Này
             </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import FreeChatMode from './components/FreeChatMode';
 import VisualNovelMode from './components/VisualNovelMode';
 import TimeVortex from './components/TimeVortex';
@@ -8,7 +8,11 @@ function App() {
   const [mode, setMode] = useState(null); // 'chat' or 'vn'
   const [isVortexing, setIsVortexing] = useState(false);
   const [vortexChar, setVortexChar] = useState(null);
-  const [initialPrompt, setInitialPrompt] = useState(null);
+  const timersRef = useRef([]);
+
+  useEffect(() => {
+    return () => timersRef.current.forEach(clearTimeout);
+  }, []);
 
   const handleCharacterSelect = (char) => {
     if (isVortexing) return;
@@ -16,13 +20,13 @@ function App() {
     setVortexChar(char);
     setIsVortexing(true);
 
-    setTimeout(() => {
+    timersRef.current.push(setTimeout(() => {
       setCharacter(char);
-    }, 1750);
+    }, 1750));
 
-    setTimeout(() => {
+    timersRef.current.push(setTimeout(() => {
       setIsVortexing(false);
-    }, 2100);
+    }, 2100));
   };
 
   return (
@@ -82,7 +86,6 @@ function App() {
                 className="btn-back-nav"
                 onClick={() => {
                   setCharacter(null);
-                  setInitialPrompt(null);
                 }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -139,7 +142,7 @@ function App() {
               </div>
             </div>
           ) : mode === 'chat' ? (
-            <FreeChatMode character={character} lang="vi" initialPrompt={initialPrompt} onBack={() => { setMode(null); setInitialPrompt(null); }} />
+            <FreeChatMode character={character} lang="vi" onBack={() => setMode(null)} />
           ) : (
             <VisualNovelMode character={character} lang="vi" onBack={() => setMode(null)} />
           )}

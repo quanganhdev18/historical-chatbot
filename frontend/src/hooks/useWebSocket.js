@@ -6,6 +6,8 @@ export function useWebSocket(url) {
   const [isReceiving, setIsReceiving] = useState(false);
   const wsRef = useRef(null);
   const currentBotMessageRef = useRef("");
+  const reconnectTimeoutRef = useRef(null);
+  const reconnectAttempts = useRef(0);
 
   const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return;
@@ -15,12 +17,24 @@ export function useWebSocket(url) {
     wsRef.current.onopen = () => {
       console.log('Connected to WebSocket');
       setIsConnected(true);
+      reconnectAttempts.current = 0;
     };
 
     wsRef.current.onclose = () => {
       console.log('Disconnected from WebSocket');
       setIsConnected(false);
       setIsReceiving(false);
+      
+      const delay = Math.min(1000 * (1.5 ** reconnectAttempts.current), 30000);
+      reconnectTimeoutRef.current = setTimeout(() => {
+        console.log(`Reconnecting WebSocket... Attempt ${reconnectAttempts.current + 1}`);
+        reconnectAttempts.current += 1;
+        connect();
+      }, delay);
+    };
+
+    wsRef.current.onerror = (err) => {
+      console.error('WebSocket error:', err);
     };
 
     wsRef.current.onmessage = (event) => {
@@ -59,8 +73,18 @@ export function useWebSocket(url) {
   useEffect(() => {
     connect();
     return () => {
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
       if (wsRef.current) {
-        wsRef.current.close();
+        // Prevent reconnect on intentional unmount
+        wsRef.current.onclose = null;
+        if (wsRef.current.readyState === 1) { // OPEN
+          wsRef.current.close();
+        } else if (wsRef.current.readyState === 0) { // CONNECTING
+          // Wait for it to open before closing to avoid console errors in Strict Mode
+          wsRef.current.onopen = () => wsRef.current.close();
+        }
       }
     };
   }, [connect]);

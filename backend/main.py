@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import uuid
 import numpy as np
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -15,6 +16,9 @@ if GEMINI_API_KEY:
 MODEL_NAME = "gemini-3.1-flash-lite"  # Đổi lại sang model gemini-3.1-flash-lite theo yêu cầu
 
 app = FastAPI()
+
+# Global state to isolate sessions
+active_sessions = {}
 
 app.add_middleware(
     CORSMiddleware,
@@ -111,6 +115,11 @@ PROMPTS = {
 - RAG context: Use the attached context for accurate historical response."""
 }
 
+FALLBACK_RESPONSES = {
+    "batrieu": "Quân Ngô càn quấy khiến linh khí đất trời nhiễu loạn. Ta tạm thời cần nghỉ ngơi, chốc lát nữa hãy đàm đạo tiếp!",
+    "leloi": "Khí độc rừng thiêng sương mù chưa tan, truyền tin đứt đoạn. Khanh hãy quay lại sau!"
+}
+
 @app.get("/")
 async def root():
     return {
@@ -122,6 +131,10 @@ async def root():
 async def websocket_endpoint(websocket: WebSocket, character_id: str, lang: str = "vi"):
     await websocket.accept()
     
+    # Generate unique session ID for this connection
+    session_id = str(uuid.uuid4())
+    active_sessions[session_id] = []
+    
     if not GEMINI_API_KEY:
         await websocket.send_text(json.dumps({
             "type": "text",
@@ -129,12 +142,12 @@ async def websocket_endpoint(websocket: WebSocket, character_id: str, lang: str 
         }))
         await websocket.send_text(json.dumps({"type": "done"}))
         await websocket.close()
+        if session_id in active_sessions:
+            del active_sessions[session_id]
         return
 
     prompt_key = f"{character_id}_{lang}"
     system_prompt = PROMPTS.get(prompt_key, PROMPTS[f"{character_id}_vi"])
-    
-    chat_history = []
     
     try:
         while True:
@@ -177,12 +190,12 @@ async def websocket_endpoint(websocket: WebSocket, character_id: str, lang: str 
                 generation_config={"temperature": 0.2}
             )
 
-            # Add to history
-            chat_history.append({"role": "user", "parts": [user_text]})
-            if len(chat_history) > 6:
-                context_messages = chat_history[-6:]
+            # Add to history using session_id
+            active_sessions[session_id].append({"role": "user", "parts": [user_text]})
+            if len(active_sessions[session_id]) > 6:
+                context_messages = active_sessions[session_id][-6:]
             else:
-                context_messages = chat_history
+                context_messages = active_sessions[session_id]
 
             bot_reply = ""
             try:
@@ -205,21 +218,26 @@ async def websocket_endpoint(websocket: WebSocket, character_id: str, lang: str 
                 await websocket.send_text(json.dumps({
                     "type": "done"
                 }))
-                chat_history.append({"role": "model", "parts": [bot_reply]})
+                active_sessions[session_id].append({"role": "model", "parts": [bot_reply]})
             except WebSocketDisconnect:
                 break
             except Exception as e:
                 print(f"Gemini streaming error: {e}")
-                error_msg = f" (Lỗi kết nối Gemini: {str(e)}) "
+                fallback_msg = FALLBACK_RESPONSES.get(character_id, "Ta đang tĩnh tâm, lát sau đàm đạo tiếp.")
                 await websocket.send_text(json.dumps({
                     "type": "text",
-                    "data": error_msg
+                    "data": fallback_msg
                 }))
                 await websocket.send_text(json.dumps({"type": "done"}))
-                chat_history.append({"role": "model", "parts": [error_msg]})
+                active_sessions[session_id].append({"role": "model", "parts": [fallback_msg]})
                 
     except WebSocketDisconnect:
-        print("WS Disconnected")
+        print(f"WS Disconnected for session {session_id}")
+    finally:
+        # Cleanup session data
+        if session_id in active_sessions:
+            del active_sessions[session_id]
+            print(f"Cleaned up session {session_id}")
 
 if __name__ == "__main__":
     import uvicorn
